@@ -1,0 +1,31 @@
+body {
+    background: linear-gradient(to right, #ffb686, #ce946d);
+ 
+}
+
+#outer {
+    /* height: 100vh; */
+    margin: auto;
+    color: #fff;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+#inner {
+    width: 350px; 
+    margin: auto;
+}
+
+.img-thumbnail {
+   padding: 0;    
+}
+
+.loginBtn {
+    position: relative;
+    bottom: 15px;
+    border: solid #fff 1px;
+}
+
+#tLogo {
+    width: 15%; 
+    padding-right: 10px;
+}

@@ -1,0 +1,12 @@
+.logIn { background: linear-gradient(to right, rgb(112, 125, 108), rgb(131, 232, 86))}
+
+#outer {
+    height: 100vh;
+    color: #fff;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#inner { width: 350px; margin: -50px auto 0}
+#inner > .col-12 > img {width: 150px;}
+#inner > .col-12 > .twit {background: none; border: solid #fff 1px}
+#inner > .col-12 > .twit:hover {background: rgb(118, 118, 118)}

@@ -2,22 +2,11 @@ const db = require("../models");
 
 module.exports = {
 
-//---------------------------- Find / Modify -------------------------------
-// findModify: function (req, res) {
-//   db.User.findAndModify({
-//     query: { twitterId: req.query },
-//     update: {},
-//     upsert: true
-//   })
-//     // .populate({path: 'splits.mtpo'})
-//     .then(dbModel => res.json({results: dbModel}))
-//     .catch(err => res.status(422).json(err));
-// },
 //---------------------------- Find All Users -------------------------------
   findAll: function (req, res) {
       db.User.find(req.query)
         // .populate({path: 'splits.mtpo'})
-        .then(dbModel => res.json({results: dbModel, sess: req.session}))
+        .then(dbModel => res.json({results: dbModel, pass: req.session.passport}))
         .catch(err => res.status(422).json(err));
   },
 

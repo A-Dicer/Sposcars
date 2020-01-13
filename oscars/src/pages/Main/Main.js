@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-// import API from "../../utils/API";
-import "./Picks.css";
-// import Icon from "../../components/Icon";
+import API from "../../utils/API";
+import "./Main.css";
+import Navbar from "../../components/Navbar";
+import Signin from "../../components/Signin";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMedal } from '@fortawesome/free-solid-svg-icons'
-import logo from "../../assets/imgs/logo.png";
+
+
 //this is the picks page.  we will be creating a form
 //for placing picks for the oscars.  Will basically go through
 //each pick with each option one by one.  Make a pick and click 
@@ -45,59 +48,69 @@ class Picks extends Component {
     super(props);
     this.state = {
       oscars: [{category: "Best Picture", options: [1,2,3,4]}],
-      user: {},
+      user: null,
       picks:{},
     }
 }
 
-  componentWillMount() { 
-    
-    const test = {Cars: 10, Boats: 2}
-    // window.history.pushState(test, "page 2")
-    console.log(window.history)
-    // API.logout().catch(err => console.log(err))
-  }
+componentDidMount() { this.getUsers() }
 
-// ---------------------------------------- handleFormSubmit -----------------------------------------------
+// ------------------------------------------- getUsers ---------------------------------------------------
+//Get all users
+getUsers = () => {
+  API.getUsers()
+      .then(res => {
+        this.setState({user: res.data.pass.user})
+
+        // res.data.pass
+        // ? console.log(res.data.pass)
+        // : console.log('not true')   
+      }
+  ).catch(err => console.log(err));
+};
+// -------------------------------------------- Signin -----------------------------------------------------
 //Action for signing people in when button is pressed.
-
-  handleFormSubmit = event => {
+  signInTwit = event => {
     event.preventDefault();
-    // window.location = "http://localhost:3001/api/auth/twitch/callback";
+    window.location = "http://127.0.0.1:3001/api/auth/twitter/";
+  };
+
+  signInGoog = event => {
+    event.preventDefault();
+    window.location = "http://127.0.0.1:3001/api/auth/google/";
   };
 
 // ----------------------------------------- Frontend Code -------------------------------------------------
   render() {
     return (
       <div className="container">
+        <Navbar info={"hello"} />
         <div className="row" id="outer">
           <div className="col-sm-12 align-self-center">
           
             <div className="row justify-content-center rounded" id="inner">         
-              <img src={logo} className="" alt="SPOSCARS Logo"/>
+              {/* <img src={logo} className="" alt="SPOSCARS Logo"/> */}
               <div className="col-12 text-center">
-                <h3>{this.state.oscars[0].category}</h3>
-                <FontAwesomeIcon icon={faMedal} />
+                <h3>
+                  {
+                    this.state.user ? `hello ${this.state.user.username}` : <Signin twit={this.signInTwit} goog={this.signInGoog}/>
+                  }
+                </h3>
+                {/* <FontAwesomeIcon icon={faMedal} />
                 <div className="text-left " style={{'width': 'max-content', 'margin': '0 auto'}}>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
-                  <label className="form-check-label" for="exampleRadios1">
+                  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
+                  <label className="form-check-label" htmlFor="exampleRadios1">
                     Default radio
                   </label>
                 </div>
                 <div className="form-check">
                   <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-                  <label className="form-check-label" for="exampleRadios2">
+                  <label className="form-check-label" htmlFor="exampleRadios2">
                     Second default radio
                   </label>
                 </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled />
-                  <label className="form-check-label" for="exampleRadios3">
-                    Disabled radio
-                  </label>
-                </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

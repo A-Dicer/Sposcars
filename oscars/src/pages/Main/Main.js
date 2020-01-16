@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import "./Main.css";
 import Navbar from "../../components/Navbar";
-import Signin from "../../components/Signin";
+import Noms from "../../components/Noms";
+// import Noms from "../../components/Noms";
+import noms from "../../assets/js/noms.js"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMedal } from '@fortawesome/free-solid-svg-icons'
+import { faMedal, faThList } from '@fortawesome/free-solid-svg-icons'
 
 
 //this is the picks page.  we will be creating a form
@@ -43,81 +45,105 @@ import { faMedal } from '@fortawesome/free-solid-svg-icons'
 //if finished show the finished component.
 
 
-class Picks extends Component {
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      oscars: [{category: "Best Picture", options: [1,2,3,4]}],
-      user: null,
-      picks:{},
+      oscars: noms,
+      user: {},
+      picks:[],
+      opacity: 0,
+      pos: 0,
+      formOpacity: 1
     }
 }
 
-componentDidMount() { this.getUsers() }
+componentDidMount() {
+  //check for backbutton use 
+  performance.navigation.type == 2
+   ? window.location.reload(true) //reload page
+   : this.getPicks(this.props.match.params.id) //get user picks
+}
 
-// ------------------------------------------- getUsers ---------------------------------------------------
-//Get all users
-getUsers = () => {
-  API.getUsers()
+// ------------------------------------------- getPicks ---------------------------------------------------
+//Get the users picks
+getPicks = (id) => {
+  API.getPicks(id)
       .then(res => {
-        this.setState({user: res.data.pass.user})
-
-        // res.data.pass
-        // ? console.log(res.data.pass)
-        // : console.log('not true')   
+        this.picksLocation(res.data.results.picks)
+        
+        //check to make sure user is signed in
+        // if(res.data.pass && Object.entries(res.data.pass).length != 0){
+            
+            //place info into state object
+            let data =  Object.assign({}, this.state)
+            // data.user = res.data.pass.user
+            data.picks = res.data.results.picks
+            data.opacity = 1
+              
+            this.setState(data) // set the state data  
+        // } 
+        // else window.location = "/"; // redirect to login page
       }
   ).catch(err => console.log(err));
 };
-// -------------------------------------------- Signin -----------------------------------------------------
-//Action for signing people in when button is pressed.
-  signInTwit = event => {
-    event.preventDefault();
-    window.location = "http://127.0.0.1:3001/api/auth/twitter/";
-  };
 
-  signInGoog = event => {
+// ------------------------------------------- onChange ----------------------------------------------------
+  onChange = event => {
+    const {name, value} = event.target;
+
+    let data =  Object.assign([], this.state.picks);
+    data[name] = value;
+    this.setState({picks: data});
+  }
+
+// ------------------------------------------ onBtnChange --------------------------------------------------
+  onBtnChange = event => {
     event.preventDefault();
-    window.location = "http://127.0.0.1:3001/api/auth/google/";
-  };
+    const pos = this.state.pos;
+    const {id} = event.target;
+    this.setState({formOpacity: 0})
+    setTimeout(function(){
+      if(id === `next`){  
+        this.setState({pos: pos+1}) 
+        API.updatePicks(this.state.user._id, this.state.picks)
+          .then(res =>{console.log(res.data.results)})
+      }
+        else this.setState({pos: pos-1})
+    }.bind(this), 500)
+
+    setTimeout(()=>{this.setState({formOpacity: 1})}, 500)
+  }
+    
+// ---------------------------------------- picksLocation --------------------------------------------------
+  picksLocation = (data) => {
+   const pos = (25 - data.filter(pick => !pick).length)
+   this.setState({pos: pos})
+  }
 
 // ----------------------------------------- Frontend Code -------------------------------------------------
   render() {
     return (
-      <div className="container">
-        <Navbar info={"hello"} />
-        <div className="row" id="outer">
-          <div className="col-sm-12 align-self-center">
-          
-            <div className="row justify-content-center rounded" id="inner">         
-              {/* <img src={logo} className="" alt="SPOSCARS Logo"/> */}
-              <div className="col-12 text-center">
-                <h3>
-                  {
-                    this.state.user ? `hello ${this.state.user.username}` : <Signin twit={this.signInTwit} goog={this.signInGoog}/>
-                  }
-                </h3>
-                {/* <FontAwesomeIcon icon={faMedal} />
-                <div className="text-left " style={{'width': 'max-content', 'margin': '0 auto'}}>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
-                  <label className="form-check-label" htmlFor="exampleRadios1">
-                    Default radio
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-                  <label className="form-check-label" htmlFor="exampleRadios2">
-                    Second default radio
-                  </label>
-                </div>
-                </div> */}
-              </div>
-            </div>
+      <div className="container-fluid" style={{"opacity": this.state.opacity}}>
+        <Navbar info={this.state.user} />
+        <div className="row " id="main">
+          <div className="col-md-4">
+             
           </div>
+          <div className="col-md-8">
+           <Noms 
+            oscars={this.state.oscars[this.state.pos]} 
+            location={this.state.pos}
+            picks={this.state.picks[this.state.pos]}
+            onChange={this.onChange}
+            onBtnChange={this.onBtnChange} 
+            opacity={this.state.formOpacity}
+          />
+          </div>    
         </div>     
       </div>
     );
   }
 }
 
-export default Picks;
+export default Main;

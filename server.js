@@ -7,7 +7,7 @@ const twit           = require("./config/twitAuth.js")
 const mongoose       = require("mongoose");
 // const socketEvents   = require('./socketEvents');  
 const routes         = require("./routes");
-const User           = require("./models/user");
+const db             = require("./models");
 
 //------------------------------- Express -----------------------------------------------
 const app = express();
@@ -34,21 +34,37 @@ passport.use(new TwitStrategy({
 },
 
 function(token, tokenSecret, profile, cb) {
-  User.findOrCreate({ twitterId: profile.id },
+  db.User.findOrCreate({ twitterId: profile.id },
     {username: profile._json.screen_name},
-
+  
   function (err, user) {
-    user.img = profile._json.profile_image_url_https
-    return cb(err, user);
+    db.Picks.findOrCreate({user: user._id},
+        function(err, picks){
+          // user.picks ? console.log(`true`) : console.log('false')
+          user.oscar
+            ? null
+            : db.User.findOneAndUpdate({ _id: user._id }, {"oscar": picks._id},
+                function(err, usre){
+                  
+                }
+              )
+              
+              user.img = profile._json.profile_image_url_https.replace("_normal", "")
+              user.oscar = picks.picks
+              return cb(err, user);
+        }
+      )
   });
 }
 ));
+
 
 passport.serializeUser(function(user, done){done(null, user)});
 passport.deserializeUser(function(user, done){done(null, user)});
 
 //------------------------------- MongoDB ----------------------------------------------
 mongoose.Promise = global.Promise;
+mongoose.set('useFindAndModify', false);
 
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/SPOS",

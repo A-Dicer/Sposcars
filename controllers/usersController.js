@@ -5,7 +5,7 @@ module.exports = {
 //---------------------------- Find All Users -------------------------------
   findAll: function (req, res) {
       db.User.find(req.query)
-        // .populate({path: 'splits.mtpo'})
+        .populate({path: 'oscar', select: 'picks'}) 
         .then(dbModel => res.json({results: dbModel, pass: req.session.passport}))
         .catch(err => res.status(422).json(err));
   },

@@ -1,2 +1,29 @@
-#navbar { border-bottom: solid rgb(53, 53, 53) 2px; margin: 15px 0; }
-#navbar > img { width: 100%; max-width: 800px }
+nav { 
+    border-bottom: solid rgb(55, 55, 55) 2px; 
+    border-top: solid rgb(55, 55, 55) 2px; 
+    margin: 0 -15px; 
+    background: linear-gradient(to right, rgb(150, 165, 145), rgb(152, 170, 143));
+    /* height: 50px; */
+    overflow: hidden;
+}
+nav > img { 
+    /* position: relative; */
+    /* bottom: -100px; */
+    /* top: -75px; */
+    /* width: 100%;  */
+    margin-left: 10px;
+    width: 190px;
+    /* border: solid #000 1px; */
+    /* background: #fff; */
+   
+}
+
+.profile {
+    /* border: solid red 1px; */
+}
+.profile  > img {
+    height: 45px;
+    border-right: solid rgb(55, 55, 55) 2px;
+    border-left: solid rgb(55, 55, 55) 2px;
+    /* border-radius: 50px; */
+}

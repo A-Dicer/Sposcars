@@ -1,1 +1,25 @@
-body {background: linear-gradient(to right, rgb(187, 187, 187), rgb(208, 208, 208));}
+body { background: #f9f9f9 }
+
+.container-fluid { transition: ease-in-out opacity 1s }
+#main > .row > .col-12 > img {
+    position: relative;
+    border-radius: 50px;
+    max-width: 100px;
+    border: solid #7b1539 2px;
+    padding: 2px;
+    background: #fff;
+    z-index: 1
+}
+
+.proInfo {
+    position: relative;
+    height: 65px;
+    width: 250px;
+    top: -82px;
+    left: 21px;
+    background:#7b1539;
+    border: solid #520e26 1px;
+    z-index: 0;
+    border-radius: 10px;
+    color: #fff
+}

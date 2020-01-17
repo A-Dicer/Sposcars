@@ -9,6 +9,7 @@ router.route("/twitter").get(passport.authenticate('twitter'));
 router.route("/twitter/callback")
 .get(passport.authenticate("twitter", { failureRedirect: "/" }), 
   function(req, res) {
+    console.log('route api')
     console.log(req.user)
     res.redirect(`${twit.redirect}/${req.user._id}` );
 });

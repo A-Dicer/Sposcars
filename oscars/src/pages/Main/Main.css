@@ -1,5 +1,5 @@
-body { background: #f9f9f9 }
-
+body { background: #f9f9f9; font-family: Futura,Helvetica,Arial,sans-serif }
+#main { max-width: 900px; margin: 0 auto }
 .container-fluid { transition: ease-in-out opacity 1s }
 #main > .row > .col-12 > img {
     position: relative;
@@ -23,3 +23,5 @@ body { background: #f9f9f9 }
     border-radius: 10px;
     color: #fff
 }
+
+.rightSide { transition:ease-in-out opacity 500ms }

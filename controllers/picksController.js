@@ -8,7 +8,7 @@ module.exports = {
       db.Picks.find(req.query)
         .populate({path: 'game.id', select: '-_id -categories -title'})
         .populate({path: 'fighters'})
-        .then(dbModel => res.json({results: dbModel, sess: req.session}))
+        .then(dbModel => res.json({results: dbModel, pass: req.session.passport}))
         .catch(err => res.status(422).json(err));
     } else { res.json({ error: "Please login", statusCode: 401 }) }
   },

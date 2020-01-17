@@ -6,7 +6,8 @@ nav {
     /* height: 50px; */
     overflow: hidden;
 }
-nav > img { 
+nav > .row {max-width: 900px; margin: 0 auto;}
+nav > .row > img { 
     /* position: relative; */
     /* bottom: -100px; */
     /* top: -75px; */

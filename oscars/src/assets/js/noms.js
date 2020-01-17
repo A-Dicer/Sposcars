@@ -243,4 +243,8 @@ module.exports = [
             {movie: "Parasite"}
         ]
     },
+    {
+        category: "HOW LONG IS THE OSCARS",
+        noms: [{movie: ""}]
+    },
 ]

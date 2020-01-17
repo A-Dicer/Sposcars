@@ -1,0 +1,26 @@
+
+.picks > .card { padding: 3px; margin: 5px 15px; width: 35rem;  padding-bottom: 0 }
+.picks > .card > .card-header { 
+    height: 50px;
+    border: none;
+    background-image: url("../../assets/imgs/background1.png");
+    transition: ease-in-out opacity 1s
+}
+.picks > .card > .card-header > img { 
+    /* border-radius: 100%; 
+    width: 80px; 
+    border: solid #efece3 2px; 
+    position: relative; 
+    bottom: -5px  */
+}
+.picks > .card > .card-body > h4 { font-size: 20px }
+
+.picks > .card > .card-body > .card-text  { font-size: 12px; padding: 3px; margin-bottom: 0px; color: #353431 }
+.picks > .card > .card-body > .card-text > div > svg { color: rgb(220, 220, 220); padding-bottom: 1px; cursor: pointer;}
+.picks > .card > .card-body > .card-text > div > svg:hover {color: #353431}
+.picks > .card > .card-body > .card-text > div { font-size: 12px; margin: 0; color: #a3a19a }
+.picks > .card > .card-body > .card-text  > hr { padding: 0; margin: 0px }
+
+
+
+

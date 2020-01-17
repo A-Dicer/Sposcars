@@ -1,23 +1,21 @@
-.card {
-  padding: 5px;
+.noms > .card {
+  padding: 3px;
   margin: 5px 15px;
   font-size: 14px;
   width: 35rem;
   max-width: 550px;
-  font-family: Futura,Helvetica,Arial,sans-serif
 }
 
-.card-header {
-  background: #efece3;
-  overflow: hidden;
+.noms > .card > .card-header {
+  border: none;
   margin-bottom: 10px;
   background-image: url("../../assets/imgs/background1.png");
   transition: ease-in-out opacity 1s
 }
-.card-header > h5 { margin: 0; transition: ease-in-out opacity 500ms }
-.card > .form-check { margin-bottom: -2px; padding-left: 25px; transition: ease-in-out opacity 500ms }
-.form-check-input { margin-top: 0.15rem }
-.card > .row > .col-6 > button { 
+.noms > .card > .card-header > h5 { margin: 0; transition: ease-in-out opacity 500ms }
+.noms > .card > .form-check { margin-bottom: -2px; padding-left: 25px; transition: ease-in-out opacity 500ms }
+.noms > .card > .form-check-input { margin-top: 0.15rem }
+.noms > .card > .row > .col-6 > button { 
   width: 100px; 
   margin-top: 15px; 
   background: none; 
@@ -25,6 +23,8 @@
   border: solid #fff 1px;
   opacity: .8
 }
-.card > .row > .col-6 > button:hover { background: #efece3; border: solid #d8d5cc 1px; color: #000 }
-.card > .row > .col-6 > button:disabled { color: #ccc }
-.card > .row > .col-6 > button:disabled:hover { background: none; border: solid #fff 1px }
+.noms > .card > .row > .col-6 > button:hover { background: #efece3; border: solid #d8d5cc 1px; color: #000 }
+.noms > .card > .row > .col-6 > button:disabled { color: #ccc }
+.noms > .card > .row > .col-6 > button:disabled:hover { background: none; border: solid #fff 1px }
+
+.time { margin-left: -40px; padding: 0 100px }

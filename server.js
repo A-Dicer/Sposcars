@@ -35,7 +35,7 @@ passport.use(new TwitStrategy({
 
 function(token, tokenSecret, profile, cb) {
   db.User.findOrCreate({ twitterId: profile.id },
-    {username: profile._json.screen_name},
+    {userName: profile._json.name},
   
   function (err, user) {
     db.Picks.findOrCreate({user: user._id},
@@ -49,9 +49,15 @@ function(token, tokenSecret, profile, cb) {
                 }
               )
               
-              user.img = profile._json.profile_image_url_https.replace("_normal", "")
-              user.oscar = picks.picks
-              return cb(err, user);
+              let data = Object.assign({}, user._doc)
+          
+              data.screenName = `@${profile._json.screen_name}`
+              data.img = profile._json.profile_image_url_https.replace("_normal", "")
+              data.background = profile._json.profile_banner_url
+              data.oscar = picks.picks
+
+              console.log(data)
+              return cb(err, data);
         }
       )
   });

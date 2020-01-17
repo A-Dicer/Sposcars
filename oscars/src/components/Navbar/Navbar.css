@@ -3,28 +3,16 @@ nav {
     border-top: solid rgb(55, 55, 55) 2px; 
     margin: 0 -15px; 
     background: linear-gradient(to right, rgb(150, 165, 145), rgb(152, 170, 143));
-    /* height: 50px; */
     overflow: hidden;
 }
-nav > .row {max-width: 900px; margin: 0 auto;}
-nav > .row > img { 
-    /* position: relative; */
-    /* bottom: -100px; */
-    /* top: -75px; */
-    /* width: 100%;  */
-    margin-left: 10px;
-    width: 190px;
-    /* border: solid #000 1px; */
-    /* background: #fff; */
-   
-}
 
-.profile {
-    /* border: solid red 1px; */
-}
-.profile  > img {
-    height: 45px;
-    border-right: solid rgb(55, 55, 55) 2px;
-    border-left: solid rgb(55, 55, 55) 2px;
-    /* border-radius: 50px; */
-}
+nav > .row {max-width: 900px; margin: 0 auto;}
+nav > .row > .col-6 > img { width: 190px }
+nav > .row > .col-6 > ul {float: right; margin-top: 3px; margin-right: 10px }
+nav > .row > .col-6 > ul > li { margin: 0px -12px }
+nav > .row > .col-6 > ul > li > a { color: #efece3; cursor: pointer }
+nav > .row > .col-6 > ul > li > a:hover { color: #d3c7a8 }
+nav > .row > .col-6 > ul > li > .twit:hover { color: #84c1da }
+nav > .row > .col-6 > ul > li > .face:hover { color: #62749b }
+nav > .row > .col-6 > ul > li > .tube:hover { color: #c57d7a }
+nav > .row > .col-6 > ul > li > .cloud:hover { color: #fac292 }

@@ -1,5 +1,4 @@
 .noms > .card {
-  padding: 3px;
   margin: 5px 15px;
   font-size: 14px;
   width: 35rem;
@@ -27,4 +26,4 @@
 .noms > .card > .row > .col-6 > button:disabled { color: #ccc }
 .noms > .card > .row > .col-6 > button:disabled:hover { background: none; border: solid #fff 1px }
 
-.time { margin-left: -40px; padding: 0 100px }
+.time { margin-left: -40px; padding: 0 15px }

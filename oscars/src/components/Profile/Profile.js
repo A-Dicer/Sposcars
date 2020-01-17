@@ -1,11 +1,5 @@
 import React from "react";
 import "./Profile.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
-
-// --------------------------------------------- logOut ----------------------------------------------------
-//redirects to logout page....
-// const logOut = () => {window.location = "/logout"};
 
 const Profile = props => 
     <div className="row profile">

@@ -7,9 +7,6 @@ import Picks from "../../components/Picks";
 import Profile from "../../components/Profile";
 import noms from "../../assets/js/noms.js"
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMedal, faThList } from '@fortawesome/free-solid-svg-icons'
-
 // 1/15/20 -------------------------------------------------------------------------------
 
 //I have a lot left to do. 
@@ -19,11 +16,11 @@ import { faMedal, faThList } from '@fortawesome/free-solid-svg-icons'
 
 //Next thing is to finish the last question for the game. The how long
 //will the oscars last question. it is a different type of question.
-//i will have to just make something for it.
+//i will have to just make something for it. √
 
 //secondly i will do the profile section.  It is just an image with the name 
 //under it.  Shouldn't really take that long.  It will be in a seperate 
-//component.  
+//component.  √
 
 //then I have decided that when you come in you will see your profile on the
 //left and your 'picks sheet' on your right.  if you haven't finished your picks
@@ -31,7 +28,7 @@ import { faMedal, faThList } from '@fortawesome/free-solid-svg-icons'
 //picking (noms component)section.  Once you have completed it it will change from
 //complete your oscar picks to "your oscar picks".  next to each pick will be an 
 //edit button allowing you to edit that specific pick if you change your mind.  
-//this option remains until the day of the oscars. 
+//this option remains until the day of the oscars.  √
 
 //last I need to make up a page for tracking people who have signed up for aaron.
 //it will show there name. if they have completed their picks and if they are a 
@@ -39,7 +36,7 @@ import { faMedal, faThList } from '@fortawesome/free-solid-svg-icons'
 
 //for now I think that is it.  If I think of anything different I will add it.
 
-//oh yeah. navbar links and signout
+//oh yeah. navbar links and signout √
 
 //1/12/20 --------------------------------------------------------------------------------
 
@@ -60,19 +57,19 @@ import { faMedal, faThList } from '@fortawesome/free-solid-svg-icons'
 //until the point of the cut off.  So if they change their minds they
 //can come back to the site and change their pick.  
 
-//1: create sign up/login 
-//2: create form
-//3: relax
+//1: create sign up/login √
+//2: create form √
+//3: relax x
 
 
-//check to see if signed in? 
-//if not show a must be signed in to make picks
+//check to see if signed in? √
+//if not show a must be signed in to make picks √
 //with a picks option
 
 
-// 2 components maybe? 
-// one that holds the picks form 
-// one that holds the completed picks form
+// 2 components maybe?  √
+// one that holds the picks form √
+// one that holds the completed picks form √
 
 //would need to know where the user is at in the form process.
 //if finished show the finished component.
@@ -158,7 +155,7 @@ class Main extends Component {
 
 componentDidMount() {
   //check for backbutton use 
-  performance.navigation.type == 2
+  performance.navigation.type === 2
    ? window.location.reload(true) //reload page
    : this.getPicks(this.props.match.params.id) //get user picks
 }
@@ -202,8 +199,8 @@ getPicks = (id) => {
     let {name, value} = event.target;
     value = value.replace(/[^0-9, :, .]/g, '');
     
-    if(name === "hour" && parseInt(value) > 24) value = 24;
-    else if(parseInt(value) > 60) value = 60
+    if(name === "hour" && parseInt(value) > 23) value = 23;
+    else if(parseInt(value) > 59) value = 59
 
     let data  =  Object.assign({}, this.state.time);
     let data2 =  Object.assign([], this.state.picks);
@@ -246,7 +243,6 @@ getPicks = (id) => {
       data[24] = (parseInt(time.hour)*3600) + (parseInt(time.min)*60) + parseInt(time.sec)
    
       setTimeout(function(){
-        //MAKE SURE TO COME BACK TO THIS MESS AND FIX IT !!!!!!!!!!!!!!!!!!!!!!!!!!!!
         this.setState({picks: data})
         this.setState({form: false})
         // API.updatePicks(this.state.user._id, data)
@@ -265,24 +261,18 @@ getPicks = (id) => {
 // ------------------------------------------- editPick ----------------------------------------------------
   editPick = (pos) => {
     this.setState({sideOpacity: 0});
-    
-    console.log(pos)
     setTimeout(()=>{this.setState({pos: pos})}, 500)
     setTimeout(()=>{this.setState({form: true})}, 520)
     setTimeout(()=>{this.setState({edit: true})}, 500)
-    let data = Object.assign([], this.state.picks);
-    let time = Object.assign({}, this.state.time)
-
-    
- 
     setTimeout(()=>{this.setState({sideOpacity: 1})}, 550)
    }
+
 // ----------------------------------------- Frontend Code -------------------------------------------------
   render() {
     return (
       <div className="container-fluid" style={{"opacity": this.state.opacity}}>
         <Navbar info={this.state.user} />
-        <div className="row" id="main">
+        <div className="row justify-content-center" id="main">
           <div className="col-md-4">          
             <Profile user={this.state.user}/>          
           </div>

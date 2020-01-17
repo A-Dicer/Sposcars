@@ -12,7 +12,7 @@
   transition: ease-in-out opacity 1s
 }
 .noms > .card > .card-header > h5 { margin: 0; transition: ease-in-out opacity 500ms }
-.noms > .card > .form-check { margin-bottom: -2px; padding-left: 25px; transition: ease-in-out opacity 500ms }
+.noms > .card > .form-check { margin-bottom: -2px; padding-left: 40px; transition: ease-in-out opacity 500ms }
 .noms > .card > .form-check-input { margin-top: 0.15rem }
 .noms > .card > .row > .col-6 > button { 
   width: 100px; 

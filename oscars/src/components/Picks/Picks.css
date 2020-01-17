@@ -6,13 +6,7 @@
     background-image: url("../../assets/imgs/background1.png");
     transition: ease-in-out opacity 1s
 }
-.picks > .card > .card-header > img { 
-    /* border-radius: 100%; 
-    width: 80px; 
-    border: solid #efece3 2px; 
-    position: relative; 
-    bottom: -5px  */
-}
+
 .picks > .card > .card-body > h4 { font-size: 20px }
 
 .picks > .card > .card-body > .card-text  { font-size: 12px; padding: 3px; margin-bottom: 0px; color: #353431 }

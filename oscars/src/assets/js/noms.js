@@ -244,7 +244,7 @@ module.exports = [
         ]
     },
     {
-        category: "HOW LONG IS THE OSCARS",
+        category: "HOW LONG WILL IT LAST",
         noms: [{movie: ""}]
     },
 ]

@@ -1,7 +1,7 @@
 import React from "react";
 import "./Picks.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faClipboardList } from '@fortawesome/free-solid-svg-icons'
 
 const timeConvert = (time) =>{
     let hours = Math.floor(time/3600);
@@ -18,23 +18,22 @@ const Picks = props =>
     <div className="row picks">
         <div className="card">
             <div className="card-header"> 
-                <h4> Your Oscar Picks </h4>
+                <h4> <FontAwesomeIcon icon={faClipboardList}  /> Your Oscar Selections </h4>
             </div>
             
             <div className="card-body">
                 {
                     props.picks.map((pick, i) =>
-                    <div className="card-text" key={`pick${i}`}> 
-                        {props.oscars[i].category}: 
-                        <div> {i===24 ? timeConvert(pick) :pick} <FontAwesomeIcon 
-                            icon={faEdit} 
-                            onClick={function(){props.edit(i)}}
-                            />
-                        </div> 
-                        <hr /> 
-                    </div>       
-                )
-
+                        <div className="card-text" key={`pick${i}`}> 
+                            {props.oscars[i].category}: 
+                            <div> {i===24 ? timeConvert(pick) :pick} <FontAwesomeIcon 
+                                icon={faEdit} 
+                                onClick={function(){props.edit(i)}}
+                                />
+                            </div> 
+                            <hr /> 
+                        </div>       
+                    )
                 }
             </div>
         </div>

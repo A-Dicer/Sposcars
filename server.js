@@ -55,8 +55,7 @@ function(token, tokenSecret, profile, cb) {
               data.img = profile._json.profile_image_url_https.replace("_normal", "")
               data.background = profile._json.profile_banner_url
               data.oscar = picks.picks
-
-              console.log(data)
+              
               return cb(err, data);
         }
       )

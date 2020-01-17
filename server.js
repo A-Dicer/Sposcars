@@ -34,6 +34,7 @@ passport.use(new TwitStrategy({
 },
 
 function(token, tokenSecret, profile, cb) {
+  console.log(`twitter Server.js`)
   db.User.findOrCreate({ twitterId: profile.id },
     {userName: profile._json.name},
   

@@ -9,7 +9,7 @@ class Login extends Component {
 //Action for signing people in when button is pressed.
 signInTwit = event => {
   event.preventDefault();
-  window.location = "http://127.0.0.1:3001/api/auth/twitter/";
+  window.location = "/api/auth/twitter/";
 };
 
 // ----------------------------------------- Frontend Code -------------------------------------------------

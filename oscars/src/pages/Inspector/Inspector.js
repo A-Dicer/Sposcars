@@ -56,7 +56,7 @@ onClick = (id, pos) => {
                 { 
                     this.state.users.map((user, i) => 
                         <div className="row justify-content-md-center inspect" key={`row${i}`}>
-                            <div className=" "> {`${i+1}: ${moment(user.oscar.date).format('M/D/YY')}`} - </div>
+                            <div className=" "> {`${i+1}: `}</div>
                             <div className=" ">{user.userName} - </div>
                             <div className=" " > 
                                 <FontAwesomeIcon 

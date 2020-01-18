@@ -3,7 +3,8 @@ import axios from "axios";
 export default {
 //------------------------------ Users Api --------------------------------------
   getUsers: function() {return axios.get("/api/users")}, // Gets all users
-
+  updateUser: function(id, info){return axios.put("/api/users/" + id, info)}, 
+  
 //------------------------------ Picks Api --------------------------------------
   getPicks: function(id) {return axios.get("/api/picks/" + id)}, // Gets picks with the given id
   saveNewPicks: function(picksData) {return axios.post("/api/picks", picksData)}, // Saves new picks to the database

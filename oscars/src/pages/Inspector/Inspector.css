@@ -1,0 +1,10 @@
+.inspect { 
+    font-size: 20px; 
+    margin: 8px auto; 
+    border-top:solid #ccc 1px; 
+    border-bottom:solid #ccc 1px;
+    
+}
+.inspect > div {margin: 5px}
+.guru {cursor: pointer;}
+

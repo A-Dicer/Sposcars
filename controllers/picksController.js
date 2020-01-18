@@ -35,8 +35,6 @@ module.exports = {
 
   update: function(req, res) {
     if (req.user) { 
-      console.log(req.params.id)
-      console.log(req.body)
       db.Picks.findOneAndUpdate({ user: req.params.id }, {$set: {picks: req.body}} )
         .then(dbModel => res.json({results: dbModel, pass: req.session.passport}))
         .catch(err => res.status(422).json(err));

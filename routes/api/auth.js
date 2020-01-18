@@ -5,10 +5,7 @@ const twit = require("../../config/twitAuth.js");
 
 // --------------------- Matches with "/api/auth" --------------------------
 // --------------------------- Twitter Auth --------------------------------
-router.route("/twitter").get(passport.authenticate('twitter'),
-  function(req, res) {
-      console.log("Twitter Auth")
-  });
+router.route("/twitter").get(passport.authenticate('twitter'));
 router.route("/twitter/callback")
 .get(passport.authenticate("twitter", { failureRedirect: "/" }), 
   function(req, res) {

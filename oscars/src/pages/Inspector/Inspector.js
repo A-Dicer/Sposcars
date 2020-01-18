@@ -3,9 +3,11 @@ import API from "../../utils/API";
 import Navbar from "../../components/Navbar";
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserAstronaut, faList } from '@fortawesome/free-solid-svg-icons'
+import { faUserAstronaut, faList, faUsers } from '@fortawesome/free-solid-svg-icons'
 import "./Inspector.css";
 
+const io = require('socket.io-client')  
+const socket = io() 
 
 class Inspector extends Component {
     constructor(props) {
@@ -13,7 +15,11 @@ class Inspector extends Component {
         this.state = {
             users: []
         }
+
+        socket.on("inspector", (payload) => {this.updateCodeFromSockets(payload)})
     }
+
+updateCodeFromSockets(payload) {this.setState({users: payload})}
 
     
 componentDidMount() {this.getUsers()}
@@ -21,6 +27,7 @@ componentDidMount() {this.getUsers()}
 // ------------------------------------------- getUsers -----------------------------------------------------
 //Get the users 
 getUsers = () => {
+    
     API.getUsers()
         .then(res => {this.setState({users: res.data.results})}
     ).catch(err => console.log(err));
@@ -39,10 +46,17 @@ onClick = (id, pos) => {
         return (
             <div className="container-fluid">
                 <Navbar />
+                <div className="row">
+                    <div className="col-12 insUser">
+                        <h4>
+                            <FontAwesomeIcon icon={faUsers} /> {this.state.users.filter(user => !user.guru).length} / <FontAwesomeIcon icon={faUserAstronaut} /> {this.state.users.filter(user => user.guru).length}
+                        </h4>
+                    </div>
+                </div>
                 { 
                     this.state.users.map((user, i) => 
                         <div className="row justify-content-md-center inspect" key={`row${i}`}>
-                            <div className=" ">{ moment(user.oscar.date).format('M/D/YY')} - </div>
+                            <div className=" "> {`${i+1}: ${moment(user.oscar.date).format('M/D/YY')}`} - </div>
                             <div className=" ">{user.userName} - </div>
                             <div className=" " > 
                                 <FontAwesomeIcon 
@@ -59,12 +73,7 @@ onClick = (id, pos) => {
                                     }.bind(this)}
                                 />
                             </div>
-                            <div className=""> 
-                                <FontAwesomeIcon  
-                                    icon={faList} 
-                                    style={{ color: user.oscar.picks.filter(pick => pick === true).length > 24 ? '#98c98c': '#c98c8c'}}  
-                                />
-                            </div>
+                            
                             <hr/>
                         </div>
                     )

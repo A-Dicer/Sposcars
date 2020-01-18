@@ -7,6 +7,11 @@ import Picks from "../../components/Picks";
 import Profile from "../../components/Profile";
 import noms from "../../assets/js/noms.js"
 
+const io = require('socket.io-client')  
+const socket = io() 
+
+socket.emit('updateInspector')
+
 class Main extends Component {
   constructor(props) {
     super(props);

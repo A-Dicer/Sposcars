@@ -3,8 +3,8 @@
     margin: 8px auto; 
     border-top:solid #ccc 1px; 
     border-bottom:solid #ccc 1px;
-    
 }
+.insUser { margin: 15px auto 0 }
 .inspect > div {margin: 5px}
 .guru {cursor: pointer;}
 

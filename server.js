@@ -5,7 +5,7 @@ const passport       = require("passport");
 const TwitStrategy   = require("passport-twitter").Strategy;
 const twit           = require("./config/twitAuth.js")
 const mongoose       = require("mongoose");
-// const socketEvents   = require('./socketEvents');  
+const socketEvents   = require('./socketEvents');  
 const routes         = require("./routes");
 const db             = require("./models");
 
@@ -84,5 +84,5 @@ const server = app.listen(PORT, function(err) {
 });
 
 //------------------------------ Socket.io ----------------------------------------------
-// const io = require('socket.io').listen(server);
-// socketEvents(io)
+const io = require('socket.io').listen(server);
+socketEvents(io)

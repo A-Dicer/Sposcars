@@ -8,13 +8,17 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+button > * {
+    pointer-events: none;
+  }
+
 #inner { width: 350px; margin: -50px auto 0 }
 #inner > img {width: 200px }
 #inner > .col-12 {opacity: 1; transition: ease-in-out opacity 1s; height: 200px}
 #inner > .col-12 > div {margin-top: 20px}
 #inner > .col-12 > div > .form-group > input {width: 200px; margin: -5px auto}
 #inner > .col-12 > div > div > input:focus {outline: none }
-#inner > .col-12 > div > small {color: red;}
+#inner > .col-12 > div > small {color: #ce1640;}
 #inner > .col-12 > div > p {padding: 0; margin: -5px}
 #inner > .col-12 > div > .btn-sm {background: none; margin: 5px; width: 175px; border: none}
 #inner > .col-12 > div > .btn-sm:hover {background: none; color: rgb(223, 223, 223) }

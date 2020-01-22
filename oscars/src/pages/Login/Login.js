@@ -108,7 +108,7 @@ signIn = event => {
                                                               break
     case "login":
       if(!parseInt(this.state.users.filter((user, i)=> user.username === inputs.username.trim()).length) == 1){
-        errors.login[0] = 'User Name is not found';
+        errors.login[0] = 'User Name is not found.';
         this.setState({errors: errors});
       } else {
       
@@ -205,7 +205,7 @@ signIn = event => {
                     disabled={this.state.btnDisable.createUser}
                     onClick={this.signIn}
                   >   
-                    <FontAwesomeIcon icon={faUserPlus} /> Create Account  
+                    <FontAwesomeIcon name="createUser" icon={faUserPlus} /> Create Account  
                   </button>
                   <small className="form-text">
                     {this.state.errors.createUser[0]}
@@ -282,7 +282,7 @@ signIn = event => {
                     className="btn btn-secondary btn-sm" 
                     onClick={this.signIn}
                   >    
-                    <FontAwesomeIcon icon={faUser} /> User Login
+                    <FontAwesomeIcon icon={faUser} name="user" /> User Login
                   </button>
                
                   <button 

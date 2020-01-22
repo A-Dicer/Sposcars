@@ -30,6 +30,15 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
   },
+
+//----------------------------- Create User ---------------------------------
+  create: function(req, res) {
+      db.User.create(req.body)
+        .then(dbModel => res.json({results: dbModel, pass: req.session.passport}))
+        .catch(err => res.status(422).json(err));
+  },
+
+
 };
 
 

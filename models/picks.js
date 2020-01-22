@@ -5,7 +5,7 @@ const defaultPicks = [false, false, false, false, false, false, false, false, fa
 const Schema = mongoose.Schema;
 
 const picksSchema = new Schema({
-    user: { type: Schema.Types.ObjectId },
+    username: { type: Schema.Types.ObjectId, ref: 'Users', index: { unique: true }},
     picks:{ type: Array, default: defaultPicks},
     time: { type: Number },
     date: { type: Date, default: Date.now }

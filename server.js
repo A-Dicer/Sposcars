@@ -26,46 +26,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(routes);
 
-//----------------------------- TwitterAuth --------------------------------------------
-passport.use(new TwitStrategy({
-  consumerKey: twit.consumer_key,
-  consumerSecret: twit.consumer_secret,
-  callbackURL: twit.callbackURL
-},
-
-function(token, tokenSecret, profile, cb) {
-  db.User.findOrCreate({ twitterId: profile.id },
-    {userName: profile._json.name},
-  
-  function (err, user) {
-    db.Picks.findOrCreate({user: user._id},
-        function(err, picks){
-          // user.picks ? console.log(`true`) : console.log('false')
-          user.oscar
-            ? null
-            : db.User.findOneAndUpdate({ _id: user._id }, {"oscar": picks._id},
-                function(err, usre){
-                  
-                }
-              )
-              
-              let data = Object.assign({}, user._doc)
-          
-              data.screenName = `@${profile._json.screen_name}`
-              data.img = profile._json.profile_image_url_https.replace("_normal", "")
-              data.background = profile._json.profile_banner_url
-              data.oscar = picks.picks
-              
-              return cb(err, data);
-        }
-      )
-  });
-}
-));
-
-
-passport.serializeUser(function(user, done){done(null, user)});
-passport.deserializeUser(function(user, done){done(null, user)});
+//------------------------------ Passport ----------------------------------------------
+require("./config/passport.js")(passport, db); //load passport strategies
 
 //------------------------------- MongoDB ----------------------------------------------
 mongoose.Promise = global.Promise;

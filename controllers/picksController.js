@@ -4,31 +4,25 @@ module.exports = {
   
 //--------------------------- Find All Picks -------------------------------
   findAll: function (req, res) {
-    if (req.user) {
       db.Picks.find(req.query)
         .populate({path: 'game.id', select: '-_id -categories -title'})
         .populate({path: 'fighters'})
         .then(dbModel => res.json({results: dbModel, pass: req.session.passport}))
         .catch(err => res.status(422).json(err));
-    } else { res.json({ error: "Please login", statusCode: 401 }) }
   },
 
 //-------------------------- Find picks By ID ------------------------------
   findById: function (req, res) {
-    // if (req.user) {
-      db.Picks.findOne({"user": req.params.id})
+      db.Picks.findOne({"username": req.params.id})
         .then(dbModel => res.json({results: dbModel, pass: req.session.passport}))
         .catch(err => res.status(422).json(err));
-    // } else { res.json({ error: "Please login", statusCode: 401 }) }
   },
 
 //---------------------------- Create Picks --------------------------------
   create: function(req, res) {
-    if (req.user) {
       db.Picks.create(req.body)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
-    } else { res.json({ error: "Please login", statusCode: 401 }) }
   },
 
 //---------------------------- Update Picks --------------------------------

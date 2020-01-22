@@ -5,7 +5,7 @@
     padding: 0; 
     border-radius: 3px; 
     border: none; 
-    background: url("../../assets/imgs/background.jpg");
+    background: url("../../assets/imgs/background1.png");
     margin-bottom:13px 
 }
 .profile > .card > .card-header > img { 
@@ -16,7 +16,7 @@
     bottom: -5px 
 }
 .profile > .card > .card-body > h4 { font-size: 20px }
-.profile > .card > .card-body > h6 { font-size: 13px; margin-top: -10px; color: #a3a19a }
+.profile > .card > .card-body > a { font-size: 13px; margin-top: -110px; color: #a3a19a }
 
 
 

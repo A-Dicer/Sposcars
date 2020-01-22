@@ -1,10 +1,17 @@
+
 .inspect { 
-    font-size: 20px; 
-    margin: 8px auto; 
-    border-top:solid #ccc 1px; 
-    border-bottom:solid #ccc 1px;
+    font-size: 14px; 
+    /* margin: 8px auto;  */
+    /* border-top:solid #ccc 1px; 
+    border-bottom:solid #ccc 1px; */
 }
-.insUser { margin: 15px auto 0 }
-.inspect > div {margin: 5px}
+.inspect > hr {margin: 2px 0}
+.inspect-head > h5 {
+    margin-top: 12px;
+}
+/* .insUser { margin: 15px auto 0 } */
+.inspect > div {margin: 0px }
 .guru {cursor: pointer;}
+.inspect-head > h5 > .twitSpec {font-size: 18px}
+.twitSpec {font-size: 12px; color: #84c1da}
 

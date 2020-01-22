@@ -5,8 +5,6 @@ module.exports = {
 //--------------------------- Find All Picks -------------------------------
   findAll: function (req, res) {
       db.Picks.find(req.query)
-        .populate({path: 'game.id', select: '-_id -categories -title'})
-        .populate({path: 'fighters'})
         .then(dbModel => res.json({results: dbModel, pass: req.session.passport}))
         .catch(err => res.status(422).json(err));
   },

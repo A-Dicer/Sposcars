@@ -98,7 +98,7 @@ signIn = event => {
       
   switch (name) {
     case "twit":
-        window.location = "http://127.0.0.1:3001/api/auth/twitter/";
+        window.location = "/api/auth/twitter/";
                                                               break
     case "user":
         this.setState({opacity: 0});

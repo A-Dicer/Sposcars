@@ -1,404 +1,5 @@
-const mongoose = require("mongoose");
-const db = require("../models");
-mongoose.Promise = global.Promise;
-
-// This file empties the fighters collection and inserts the fighters below
-
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/SPOS",
-{ useNewUrlParser: true,
-  useUnifiedTopology: true 
-}
-);
-
-
-newObject = (id) => { return new mongoose.Types.ObjectId(id) };
-
-const userSeed = [
-  {
-      "guru": true,
-      "_id": newObject("5e2847fd92e881001716cc8e"),
-      "twitterId": "885224216005685251",
-      "username": "Andrew Dicer",
-      "__v": 0,
-      "oscar": newObject("5e2847fd92e881001716cc8f")
-  },
-  {
-      "guru": true,
-      "_id": newObject("5e2866fbdb93410017008633"),
-      "twitterId": "7759222",
-      "username": "Dicer",
-      "__v": 0,
-      "oscar": newObject("5e2866fbdb93410017008634")
-      },
-  {
-      "guru": false,
-      "_id": newObject("5e2868efdb93410017008635"),
-      "twitterId": "97755448",
-      "username": "Fernando Machado",
-      "__v": 0,
-      "oscar": newObject("5e2868efdb93410017008636")
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286909db93410017008637"),
-      "twitterId": "25027634",
-      "username": "Frank Kemp",
-      "__v": 0,
-      "oscar": newObject("5e286909db93410017008638")
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286963db93410017008639"),
-      "twitterId": "1134423227109904385",
-      "username": "One Sentence Reviews",
-      "__v": 0,
-      "oscar": newObject("5e286963db9341001700863a"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28697fdb9341001700863b"),
-      "username": "AustinB",
-      "password": "!^!EHvJ4hsMFDogxNl/sfohveJ2gLSAkaOilll85aojcrjIUgCLn0/ky",
-      "__v": 0,
-      "oscar": newObject("5e28697fdb9341001700863c"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e2869d0db9341001700863d"),
-      "twitterId": "1068500336",
-      "username": "joshua",
-      "__v": 0,
-      "oscar": newObject("5e2869d0db9341001700863e"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286a15db9341001700863f"),
-      "twitterId": "4060613061",
-      "username": "Ronan",
-      "__v": 0,
-      "oscar": newObject("5e286a15db93410017008640"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286aacdb93410017008641"),
-      "twitterId": "112888825",
-      "username": "Wyatt Duclos",
-      "__v": 0,
-      "oscar": newObject("5e286aacdb93410017008642"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286b47db93410017008643"),
-      "twitterId": "115259793",
-      "username": "Jeremy Sarine",
-      "__v": 0,
-      "oscar": newObject("5e286b47db93410017008644"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286b7cdb93410017008645"),
-      "twitterId": "616367709",
-      "username": "Nashjillian #ENOUGH #KeepFighting",
-      "__v": 0,
-      "oscar": newObject("5e286b7cdb93410017008646"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286d27db93410017008647"),
-      "twitterId": "2755070007",
-      "username": "Nolan",
-      "__v": 0,
-      "oscar": newObject("5e286d27db93410017008648"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286d8cdb93410017008649"),
-      "twitterId": "18734600",
-      "username": "Sam Moss",
-      "__v": 0,
-      "oscar": newObject("5e286d8cdb9341001700864a"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286deadb9341001700864b"),
-      "username": "@Jeremiahmurphy",
-      "password": "!^!jH3Ysbk7OTrQ6jPB4ghvYOc6qG755u/XY4OHLwB.ot3CyM6B0wXDi",
-      "__v": 0,
-      "oscar": newObject("5e286deadb9341001700864c"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286f45db9341001700864d"),
-      "twitterId": "406317388",
-      "username": "Robert Bouffard",
-      "__v": 0,
-      "oscar": newObject("5e286f45db9341001700864e"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286f87db9341001700864f"),
-      "twitterId": "3235570381",
-      "username": "Jake Bourgeois",
-      "__v": 0,
-      "oscar": newObject("5e286f87db93410017008650"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e286fb0db93410017008651"),
-      "twitterId": "735867798698745856",
-      "username": "Chris Hampker",
-      "__v": 0,
-      "oscar": newObject("5e286fb0db93410017008652"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e287253db93410017008653"),
-      "twitterId": "3245826577",
-      "username": "Jake",
-      "__v": 0,
-      "oscar": newObject("5e287253db93410017008654"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e287318db93410017008655"),
-      "twitterId": "728811097466273792",
-      "username": "Spence Mullett",
-      "__v": 0,
-      "oscar": newObject("5e287318db93410017008656"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e287328db93410017008657"),
-      "username": "SlabBulkhead",
-      "password": "!^!1mzD.yfRL9tMfHOQjVK.IuD/f1HnnTFKGo39Tsy/5MYBE5DtX9VIm",
-      "__v": 0,
-      "oscar": newObject("5e287328db93410017008658"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e2873e3db93410017008659"),
-      "twitterId": "1320365258",
-      "username": "Tom Davidson",
-      "__v": 0,
-      "oscar": newObject("5e2873e3db9341001700865a"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e2874fedb9341001700865b"),
-      "twitterId": "3254310063",
-      "username": "tiago",
-      "__v": 0,
-      "oscar": newObject("5e2874fedb9341001700865c"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28760fdb9341001700865d"),
-      "twitterId": "430676820",
-      "username": "Matthew Park",
-      "__v": 0,
-      "oscar": newObject("5e28760fdb9341001700865e"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e287624db9341001700865f"),
-      "twitterId": "475842103",
-      "username": "Sheldon Dugas",
-      "__v": 0,
-      "oscar": newObject("5e287624db93410017008660"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e287829db93410017008661"),
-      "twitterId": "70807544",
-      "username": "Hollick Imaging & Creation",
-      "__v": 0,
-      "oscar": newObject("5e287829db93410017008662"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e287c9bdb93410017008663"),
-      "twitterId": "424002557",
-      "username": "Bob California",
-      "__v": 0,
-      "oscar": newObject("5e287c9bdb93410017008664"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e287d75db93410017008665"),
-      "twitterId": "96168759",
-      "username": "🦉LAURA TERRELL🦉",
-      "__v": 0,
-      "oscar": newObject("5e287d76db93410017008666"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e288011db93410017008667"),
-      "twitterId": "1107029928170672129",
-      "username": "Jake Hageman",
-      "__v": 0,
-      "oscar": newObject("5e288011db93410017008668"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28822adb93410017008669"),
-      "twitterId": "245539080",
-      "username": "Drew Thomas",
-      "__v": 0,
-      "oscar": newObject("5e28822adb9341001700866a"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28827ddb9341001700866b"),
-      "twitterId": "3253835785",
-      "username": "Nash",
-      "__v": 0,
-      "oscar": newObject("5e28827ddb9341001700866c"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e288d01db9341001700866d"),
-      "twitterId": "114187068",
-      "username": "Ishan Chawla",
-      "__v": 0,
-      "oscar": newObject("5e288d01db9341001700866e"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e289038db9341001700866f"),
-      "twitterId": "1176693250813550594",
-      "username": "Caleb",
-      "__v": 0,
-      "oscar": newObject("5e289038db93410017008670"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e289576db93410017008671"),
-      "twitterId": "3194115542",
-      "username": "Scrap",
-      "__v": 0,
-      "oscar": newObject("5e289576db93410017008672"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e289948db93410017008673"),
-      "twitterId": "812002207826579456",
-      "username": "Nick Ferro",
-      "__v": 0,
-      "oscar": newObject("5e289948db93410017008674"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e289f9bdb93410017008675"),
-      "twitterId": "1016834195040227328",
-      "username": "Max Zwach",
-      "__v": 0,
-      "oscar": newObject("5e289f9bdb93410017008676"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28a50edb93410017008677"),
-      "twitterId": "226979960",
-      "username": "Seppe Kuppens",
-      "__v": 0,
-      "oscar": newObject("5e28a50edb93410017008678"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28b5e2db93410017008679"),
-      "twitterId": "797550754550677504",
-      "username": "Lance Giuliano",
-      "__v": 0,
-      "oscar": newObject("5e28b5e2db9341001700867a"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28c423db9341001700867b"),
-      "username": "NickD",
-      "password": "!^!uSSScWW5SjHn86KZvab0KO2rpZT9NbRoLfXNemnquxOkJNJRhqTda",
-      "__v": 0,
-      "oscar": newObject("5e28c423db9341001700867c"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28c47bdb9341001700867d"),
-      "twitterId": "948864074359611392",
-      "username": "Lachaln",
-      "__v": 0,
-      "oscar": newObject("5e28c47bdb9341001700867e"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28cd57db9341001700867f"),
-      "twitterId": "2173080144",
-      "username": "Edmund Snow",
-      "__v": 0,
-      "oscar": newObject("5e28cd57db93410017008680"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28d0ebdb93410017008681"),
-      "twitterId": "552106673",
-      "username": "Ryan Kikuchi",
-      "__v": 0,
-      "oscar": newObject("5e28d0ebdb93410017008682"),
-  },
-  {
-  "guru": false,
-  "_id": newObject("5e28d976db93410017008683"),
-  "twitterId": "3301256285",
-  "username": "Howard Ratner 💎",
-  "__v": 0,
-  "oscar": newObject("5e28d976db93410017008684"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28f4e3db93410017008685"),
-      "twitterId": "839585025024790528",
-      "username": "sueño_sometimes",
-      "__v": 0,
-      "oscar": newObject("5e28f4e3db93410017008686"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e290e2fdb93410017008689"),
-      "twitterId": "1851327836",
-      "username": "Gideon Patrick",
-      "__v": 0,
-      "oscar": newObject("5e290e2fdb9341001700868a"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e28fa5ddb93410017008687"),
-      "twitterId": "553953624",
-      "username": "Chandler Robinson IV",
-      "__v": 0,
-      "oscar": newObject("5e28fa5ddb93410017008688"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e291c9fdb9341001700868b"),
-      "twitterId": "575387140",
-      "username": "Hamlet",
-      "__v": 0,
-      "oscar": newObject("5e291c9fdb9341001700868c"),
-  },
-  {
-      "guru": false,
-      "_id": newObject("5e29247adb9341001700868d"),
-      "twitterId": "85183546",
-      "username": "Sean Thompson",
-      "__v": 0,
-      "oscar": newObject("5e29247adb9341001700868e"),
-  },     
-]
-
-
-
-// const id = new mongoose.Types.ObjectId("5acf8eb59872806d554c3ed3");
-
-
-
-const picksSeed = [
+module.exports =  {
+    "results": [
         {
         "picks": [
         "Adam Driver, Marriage Story",
@@ -427,7 +28,7 @@ const picksSeed = [
         "Knives Out",
         12212
         ],
-        "_id": newObject("5e2847fd92e881001716cc8f"),
+        "_id": "5e2847fd92e881001716cc8f",
         "username": "5e2847fd92e881001716cc8e",
         "date": "2020-01-22T13:02:53.576Z",
         "__v": 0
@@ -460,7 +61,7 @@ const picksSeed = [
         "Knives Out",
         3841
         ],
-        "_id": newObject("5e2866fbdb93410017008634"),
+        "_id": "5e2866fbdb93410017008634",
         "username": "5e2866fbdb93410017008633",
         "date": "2020-01-22T15:15:07.468Z",
         "__v": 0
@@ -493,7 +94,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         11048
         ],
-        "_id": newObject("5e2868efdb93410017008636"),
+        "_id": "5e2868efdb93410017008636",
         "username": "5e2868efdb93410017008635",
         "date": "2020-01-22T15:23:27.601Z",
         "__v": 0
@@ -526,7 +127,7 @@ const picksSeed = [
         false,
         false
         ],
-        "_id": newObject("5e286963db9341001700863a"),
+        "_id": "5e286963db9341001700863a",
         "username": "5e286963db93410017008639",
         "date": "2020-01-22T15:25:23.683Z",
         "__v": 0
@@ -559,7 +160,7 @@ const picksSeed = [
         "Knives Out",
         13773
         ],
-        "_id": newObject("5e286909db93410017008638"),
+        "_id": "5e286909db93410017008638",
         "username": "5e286909db93410017008637",
         "date": "2020-01-22T15:23:53.170Z",
         "__v": 0
@@ -592,7 +193,7 @@ const picksSeed = [
         "Knives Out",
         12625
         ],
-        "_id": newObject("5e28697fdb9341001700863c"),
+        "_id": "5e28697fdb9341001700863c",
         "username": "5e28697fdb9341001700863b",
         "date": "2020-01-22T15:25:51.906Z",
         "__v": 0
@@ -625,7 +226,7 @@ const picksSeed = [
         "Parasite",
         10577
         ],
-        "_id": newObject("5e2869d0db9341001700863e"),
+        "_id": "5e2869d0db9341001700863e",
         "username": "5e2869d0db9341001700863d",
         "date": "2020-01-22T15:27:12.494Z",
         "__v": 0
@@ -658,7 +259,7 @@ const picksSeed = [
         false,
         false
         ],
-        "_id": newObject("5e2874fedb9341001700865c"),
+        "_id": "5e2874fedb9341001700865c",
         "username": "5e2874fedb9341001700865b",
         "date": "2020-01-22T16:14:54.139Z",
         "__v": 0
@@ -691,7 +292,7 @@ const picksSeed = [
         false,
         false
         ],
-        "_id": newObject("5e28822adb9341001700866a"),
+        "_id": "5e28822adb9341001700866a",
         "username": "5e28822adb93410017008669",
         "date": "2020-01-22T17:11:06.210Z",
         "__v": 0
@@ -724,7 +325,7 @@ const picksSeed = [
         "Marriage Story",
         12289
         ],
-        "_id": newObject("5e286a15db93410017008640"),
+        "_id": "5e286a15db93410017008640",
         "username": "5e286a15db9341001700863f",
         "date": "2020-01-22T15:28:21.656Z",
         "__v": 0
@@ -757,7 +358,7 @@ const picksSeed = [
         "Knives Out",
         11568
         ],
-        "_id": newObject("5e286aacdb93410017008642"),
+        "_id": "5e286aacdb93410017008642",
         "username": "5e286aacdb93410017008641",
         "date": "2020-01-22T15:30:52.695Z",
         "__v": 0
@@ -790,7 +391,7 @@ const picksSeed = [
         "Knives Out",
         12075
         ],
-        "_id": newObject("5e286b7cdb93410017008646"),
+        "_id": "5e286b7cdb93410017008646",
         "username": "5e286b7cdb93410017008645",
         "date": "2020-01-22T15:34:20.694Z",
         "__v": 0
@@ -823,7 +424,7 @@ const picksSeed = [
         "Knives Out",
         13281
         ],
-        "_id": newObject("5e286b47db93410017008644"),
+        "_id": "5e286b47db93410017008644",
         "username": "5e286b47db93410017008643",
         "date": "2020-01-22T15:33:27.405Z",
         "__v": 0
@@ -856,7 +457,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         25627
         ],
-        "_id": newObject("5e286d8cdb9341001700864a"),
+        "_id": "5e286d8cdb9341001700864a",
         "username": "5e286d8cdb93410017008649",
         "date": "2020-01-22T15:43:08.827Z",
         "__v": 0
@@ -889,7 +490,7 @@ const picksSeed = [
         "Marriage Story",
         13712
         ],
-        "_id": newObject("5e286d27db93410017008648"),
+        "_id": "5e286d27db93410017008648",
         "username": "5e286d27db93410017008647",
         "date": "2020-01-22T15:41:27.418Z",
         "__v": 0
@@ -922,7 +523,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         11907
         ],
-        "_id": newObject("5e286deadb9341001700864c"),
+        "_id": "5e286deadb9341001700864c",
         "username": "5e286deadb9341001700864b",
         "date": "2020-01-22T15:44:42.806Z",
         "__v": 0
@@ -955,7 +556,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         11857
         ],
-        "_id": newObject("5e286f45db9341001700864e"),
+        "_id": "5e286f45db9341001700864e",
         "username": "5e286f45db9341001700864d",
         "date": "2020-01-22T15:50:29.139Z",
         "__v": 0
@@ -988,7 +589,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         11516
         ],
-        "_id": newObject("5e286fb0db93410017008652"),
+        "_id": "5e286fb0db93410017008652",
         "username": "5e286fb0db93410017008651",
         "date": "2020-01-22T15:52:16.785Z",
         "__v": 0
@@ -1021,7 +622,7 @@ const picksSeed = [
         "Knives Out",
         11843
         ],
-        "_id": newObject("5e286f87db93410017008650"),
+        "_id": "5e286f87db93410017008650",
         "username": "5e286f87db9341001700864f",
         "date": "2020-01-22T15:51:35.529Z",
         "__v": 0
@@ -1054,7 +655,7 @@ const picksSeed = [
         "1917",
         10043
         ],
-        "_id": newObject("5e287318db93410017008656"),
+        "_id": "5e287318db93410017008656",
         "username": "5e287318db93410017008655",
         "date": "2020-01-22T16:06:48.986Z",
         "__v": 0
@@ -1087,7 +688,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         14823
         ],
-        "_id": newObject("5e287328db93410017008658"),
+        "_id": "5e287328db93410017008658",
         "username": "5e287328db93410017008657",
         "date": "2020-01-22T16:07:04.575Z",
         "__v": 0
@@ -1120,7 +721,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         11430
         ],
-        "_id": newObject("5e2873e3db9341001700865a"),
+        "_id": "5e2873e3db9341001700865a",
         "username": "5e2873e3db93410017008659",
         "date": "2020-01-22T16:10:11.200Z",
         "__v": 0
@@ -1153,7 +754,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         11996
         ],
-        "_id": newObject("5e287624db93410017008660"),
+        "_id": "5e287624db93410017008660",
         "username": "5e287624db9341001700865f",
         "date": "2020-01-22T16:19:48.439Z",
         "__v": 0
@@ -1186,7 +787,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         11553
         ],
-        "_id": newObject("5e28760fdb9341001700865e"),
+        "_id": "5e28760fdb9341001700865e",
         "username": "5e28760fdb9341001700865d",
         "date": "2020-01-22T16:19:27.886Z",
         "__v": 0
@@ -1219,7 +820,7 @@ const picksSeed = [
         "Knives Out",
         12162
         ],
-        "_id": newObject("5e287829db93410017008662"),
+        "_id": "5e287829db93410017008662",
         "username": "5e287829db93410017008661",
         "date": "2020-01-22T16:28:25.681Z",
         "__v": 0
@@ -1252,7 +853,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         12767
         ],
-        "_id": newObject("5e287253db93410017008654"),
+        "_id": "5e287253db93410017008654",
         "username": "5e287253db93410017008653",
         "date": "2020-01-22T16:03:31.989Z",
         "__v": 0
@@ -1285,7 +886,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         12466
         ],
-        "_id": newObject("5e287c9bdb93410017008664"),
+        "_id": "5e287c9bdb93410017008664",
         "username": "5e287c9bdb93410017008663",
         "date": "2020-01-22T16:47:23.697Z",
         "__v": 0
@@ -1318,7 +919,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         13369
         ],
-        "_id": newObject("5e288011db93410017008668"),
+        "_id": "5e288011db93410017008668",
         "username": "5e288011db93410017008667",
         "date": "2020-01-22T17:02:09.243Z",
         "__v": 0
@@ -1351,7 +952,7 @@ const picksSeed = [
         "Knives Out",
         13654
         ],
-        "_id": newObject("5e287d76db93410017008666"),
+        "_id": "5e287d76db93410017008666",
         "username": "5e287d75db93410017008665",
         "date": "2020-01-22T16:51:02.010Z",
         "__v": 0
@@ -1384,7 +985,7 @@ const picksSeed = [
         "Parasite",
         13612
         ],
-        "_id": newObject("5e28827ddb9341001700866c"),
+        "_id": "5e28827ddb9341001700866c",
         "username": "5e28827ddb9341001700866b",
         "date": "2020-01-22T17:12:29.158Z",
         "__v": 0
@@ -1417,7 +1018,7 @@ const picksSeed = [
         "Parasite",
         11111
         ],
-        "_id": newObject("5e288d01db9341001700866e"),
+        "_id": "5e288d01db9341001700866e",
         "username": "5e288d01db9341001700866d",
         "date": "2020-01-22T17:57:21.770Z",
         "__v": 0
@@ -1450,7 +1051,7 @@ const picksSeed = [
         "Knives Out",
         26592
         ],
-        "_id": newObject("5e289038db93410017008670"),
+        "_id": "5e289038db93410017008670",
         "username": "5e289038db9341001700866f",
         "date": "2020-01-22T18:11:04.506Z",
         "__v": 0
@@ -1483,7 +1084,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         16574
         ],
-        "_id": newObject("5e289576db93410017008672"),
+        "_id": "5e289576db93410017008672",
         "username": "5e289576db93410017008671",
         "date": "2020-01-22T18:33:26.849Z",
         "__v": 0
@@ -1516,7 +1117,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         11063
         ],
-        "_id": newObject("5e289948db93410017008674"),
+        "_id": "5e289948db93410017008674",
         "username": "5e289948db93410017008673",
         "date": "2020-01-22T18:49:44.816Z",
         "__v": 0
@@ -1549,7 +1150,7 @@ const picksSeed = [
         "Parasite",
         11699
         ],
-        "_id": newObject("5e289f9bdb93410017008676"),
+        "_id": "5e289f9bdb93410017008676",
         "username": "5e289f9bdb93410017008675",
         "date": "2020-01-22T19:16:43.522Z",
         "__v": 0
@@ -1582,7 +1183,7 @@ const picksSeed = [
         "Knives Out",
         16583
         ],
-        "_id": newObject("5e28a50edb93410017008678"),
+        "_id": "5e28a50edb93410017008678",
         "username": "5e28a50edb93410017008677",
         "date": "2020-01-22T19:39:58.921Z",
         "__v": 0
@@ -1615,7 +1216,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         13871
         ],
-        "_id": newObject("5e28b5e2db9341001700867a"),
+        "_id": "5e28b5e2db9341001700867a",
         "username": "5e28b5e2db93410017008679",
         "date": "2020-01-22T20:51:46.760Z",
         "__v": 0
@@ -1648,7 +1249,7 @@ const picksSeed = [
         "Parasite",
         12750
         ],
-        "_id": newObject("5e28c47bdb9341001700867e"),
+        "_id": "5e28c47bdb9341001700867e",
         "username": "5e28c47bdb9341001700867d",
         "date": "2020-01-22T21:54:03.984Z",
         "__v": 0
@@ -1681,7 +1282,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         11877
         ],
-        "_id": newObject("5e28c423db9341001700867c"),
+        "_id": "5e28c423db9341001700867c",
         "username": "5e28c423db9341001700867b",
         "date": "2020-01-22T21:52:35.449Z",
         "__v": 0
@@ -1714,7 +1315,7 @@ const picksSeed = [
         false,
         false
         ],
-        "_id": newObject("5e28cd57db93410017008680"),
+        "_id": "5e28cd57db93410017008680",
         "username": "5e28cd57db9341001700867f",
         "date": "2020-01-22T22:31:51.994Z",
         "__v": 0
@@ -1747,7 +1348,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         12317
         ],
-        "_id": newObject("5e28d0ebdb93410017008682"),
+        "_id": "5e28d0ebdb93410017008682",
         "username": "5e28d0ebdb93410017008681",
         "date": "2020-01-22T22:47:07.545Z",
         "__v": 0
@@ -1780,7 +1381,7 @@ const picksSeed = [
         "Knives Out",
         12402
         ],
-        "_id": newObject("5e28d976db93410017008684"),
+        "_id": "5e28d976db93410017008684",
         "username": "5e28d976db93410017008683",
         "date": "2020-01-22T23:23:34.485Z",
         "__v": 0
@@ -1813,7 +1414,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         10997
         ],
-        "_id": newObject("5e28f4e3db93410017008686"),
+        "_id": "5e28f4e3db93410017008686",
         "username": "5e28f4e3db93410017008685",
         "date": "2020-01-23T01:20:35.050Z",
         "__v": 0
@@ -1846,7 +1447,7 @@ const picksSeed = [
         "Knives Out",
         14052
         ],
-        "_id": newObject("5e28fa5ddb93410017008688"),
+        "_id": "5e28fa5ddb93410017008688",
         "username": "5e28fa5ddb93410017008687",
         "date": "2020-01-23T01:43:57.741Z",
         "__v": 0
@@ -1879,7 +1480,7 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         10983
         ],
-        "_id": newObject("5e290e2fdb9341001700868a"),
+        "_id": "5e290e2fdb9341001700868a",
         "username": "5e290e2fdb93410017008689",
         "date": "2020-01-23T03:08:31.973Z",
         "__v": 0
@@ -1912,7 +1513,7 @@ const picksSeed = [
         "Knives Out",
         14503
         ],
-        "_id": newObject("5e291c9fdb9341001700868c"),
+        "_id": "5e291c9fdb9341001700868c",
         "username": "5e291c9fdb9341001700868b",
         "date": "2020-01-23T04:10:07.723Z",
         "__v": 0
@@ -1945,36 +1546,10 @@ const picksSeed = [
         "Once upon a Time...in Hollywood",
         15930
         ],
-        "_id": newObject("5e29247adb9341001700868e"),
+        "_id": "5e29247adb9341001700868e",
         "username": "5e29247adb9341001700868d",
         "date": "2020-01-23T04:43:38.278Z",
         "__v": 0
-    }
-];
-
-//--------------- populate users data -----------------------
-db.User
-  .deleteMany({})
-  .then(() => db.User.collection.insertMany(userSeed))
-  .then(data => {
-    console.log(`${data.insertedCount} user records inserted!`);
-    //------------------ populate picks data ---------------------
-    db.Picks
-      .deleteMany({})
-      .then(() => db.Picks.collection.insertMany(picksSeed))
-      .then(data => {
-        console.log(`${data.insertedCount} user picks inserted!`);
-        process.exit(0)
-      })
-      .catch(err => {
-        console.error(err);
-        process.exit(1);
-      });
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
-
-
-
+        }
+    ],
+};

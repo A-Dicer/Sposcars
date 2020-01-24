@@ -26,10 +26,8 @@ module.exports = {
 //---------------------------- Update Picks --------------------------------
 
   update: function(req, res) {
-    if (req.user) { 
       db.Picks.findOneAndUpdate({ username: req.params.id }, {$set: {picks: req.body}} )
         .then(dbModel => res.json({results: dbModel, pass: req.session.passport}))
         .catch(err => res.status(422).json(err));
-    } else { res.json({ error: "Please login", statusCode: 401 }) }
   },
 };

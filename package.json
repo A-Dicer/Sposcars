@@ -22,6 +22,7 @@
     "@fortawesome/fontawesome-free": "^5.12.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@fortawesome/free-brands-svg-icons": "^5.12.0",
+    "@fortawesome/free-regular-svg-icons": "^5.12.0",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/react-fontawesome": "^0.1.8",
     "axios": "^0.19.1",
@@ -38,6 +39,7 @@
     "passport-local-mongoose": "^6.0.1",
     "passport-twitter": "^1.0.4",
     "react-router-dom": "^5.1.2",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "twitter": "^1.7.1"
   }
 }

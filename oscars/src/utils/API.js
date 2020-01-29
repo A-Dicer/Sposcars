@@ -1,6 +1,9 @@
 import axios from "axios";
 
 export default {
+//----------------------------- Twitter Api -------------------------------------
+  getTwitter: function(id){return axios.get('api/twitter/' + id)},
+
 //------------------------------ Users Api --------------------------------------
   getUsers: function() {return axios.get("/api/users")}, // Gets all users
   updateUser: function(id, info){return axios.put("/api/users/" + id, info)}, 

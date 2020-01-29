@@ -14,9 +14,9 @@
     position: relative; 
     bottom: -5px 
 }
-.profile > .card > .card-body > h4 { font-size: 20px }
-.profile > .card > .card-body > a { font-size: 13px; margin-top: -110px; color: #a3a19a }
-
+.profile > .card > .card-body > h4 { font-size: 20px}
+.profile > .card > .card-body > a { position: relative; top: -13px; font-size: 13px; color: #a3a19a }
+.profile > .card > .card-body > a:hover > svg {color: #84c1da}
 
 
 

@@ -5,46 +5,16 @@ import Profile from "../../components/ProfileSpo";
 // import noms from "../../assets/js/noms.js";
 import {Leaderboard, Category} from "../../components/Leaderboard/";
 
-console.log(window.innerHeight)
+const io = require('socket.io-client')  
+const socket = io() 
+
 class Sposcars extends Component {
-  state = {
-    noms: {
-      category: "ACTOR IN A LEADING ROLE",
-      noms: [
-        {movie: "Antonio Banderas, Pain and Glory"},
-        {movie: "Leonardo DiCaprio, Once upon a Time...in Hollywood"},
-        {movie: "Adam Driver, Marriage Story"},
-        {movie: "Joaquin Phoenix, Joker"},
-        {movie: "Jonathan Pryce, The Two Popes"}
-      ]
-    },
+  constructor(props) {
+  super(props);
+  this.state = {
+    noms: false,
     guru: false,
-    livePicks: [
-      'Adam Driver, Marriage Story',
-      'Brad Pitt, Once upon a Time...in Hollywood',,
-      false,
-      false,
-      false,
-      false,
-      '1917',
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      'Little Women',
-      false,
-      false
-      ],
+    livePicks: [],
     players: {},
     user:  {
       "guru": true,
@@ -57,8 +27,7 @@ class Sposcars extends Component {
       "img": "https://pbs.twimg.com/profile_images/1216164245185814528/nXx3fP4B.jpg",
       "points": 34,
       "place": 23,
-      "movement": 2,
-      "direction": "Up",  
+      "movement": 2,  
     },
     picks: [
       "Adam Driver, Marriage Story",
@@ -87,8 +56,20 @@ class Sposcars extends Component {
       "Knives Out",
       12212
       ],
-    picksHeight: '2px',
-  };
+    picksHeight: 0,
+  }
+    socket.on("oscarNom", (payload) => {this.updateNomsFromSockets(payload)})
+    socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
+}
+  updateNomsFromSockets(payload) {this.setState({noms: payload.info})}
+  updateLeaderboardFromSockets(payload) {
+    let newUserInfo = payload.leaderboard.filter((user)=> user._id === this.state.user._id)
+    this.userData(newUserInfo[0])
+    this.setState({
+      players: payload.leaderboard, 
+      livePicks: payload.picks
+    })
+  }
 
   componentDidMount() { 
     this.loadUsers(); 
@@ -101,8 +82,24 @@ class Sposcars extends Component {
   }
 
   updateDimensions = () => {
+    this.picksBtn(1);
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
+
+  userData = (user) => {
+    if(user.twitterId){
+      API.getTwitter(user.twitterId)
+        .then(res => {
+          user.screenName = `@${res.data.results.screenName}`;
+          user.img = res.data.results.img
+          this.setState({user: user})
+        })
+        .catch(err => console.log(err))
+    } else {
+      user.img = "https://abs.twimg.com/sticky/default_profile_images/default_profile.png"
+      this.setState({user: user})
+    }
+  }
 
   onClick = event => {
     event.preventDefault()
@@ -130,18 +127,24 @@ class Sposcars extends Component {
 
   loadUsers = () => {
     API.getUsers()
-      .then(res => {
-        this.setState({players: res.data.results})
-        console.log(res.data.results)
-      })
+      .then(res => {this.setState({players: res.data.results})})
       .catch(err => console.log(err));
   };
 
-  picksBtn = () => {
-    console.log('click')
+  picksBtn = (thing) => {
+ 
+    let offsetHeight = document.getElementById('right').offsetHeight;
+    let offsetHeight2 = document.getElementById('picksSpo').offsetHeight;
     let height;
-    this.state.picksHeight === '2px' ? height = '1030px' : height = '2px'
-    this.setState({picksHeight: height})
+    if(thing && this.state.picksHeight === 0) ;
+    else if(thing){
+      height = this.state.height - (offsetHeight - offsetHeight2) - 50
+      this.setState({picksHeight: height})
+    } 
+    else {
+      this.state.picksHeight === 0 ? height = this.state.height - offsetHeight -50 : height = 0
+      this.setState({picksHeight: height})
+    }
   }
 
   render() {
@@ -158,10 +161,13 @@ class Sposcars extends Component {
             </div>
           </div>
 
-          <div className="col-sm-4 right">
-            <div className="row">
-              <div className="col-12 border" style={{'height': '200px'}}>
-                <Category oscars={this.state.noms}/>
+          <div className="col-sm-4 right" style={{'height': this.state.height-50}} >
+            <div className="row" id="right">
+              <div className="col-12" >
+                {
+                  this.state.noms ? <Category oscars={this.state.noms}/> : null
+                }
+                
               </div>
               <div className="col-12">
                 <Profile 

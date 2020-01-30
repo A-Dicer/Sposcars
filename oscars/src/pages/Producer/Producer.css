@@ -1,0 +1,9 @@
+
+.inspect { font-size: 14px }
+.inspect > hr {margin: 2px 0}
+.inspect-head > h5 { margin-top: 12px }
+.inspect > div { margin: 0px }
+.guru { cursor: pointer }
+.inspect-head > h5 > .twitSpec { font-size: 18px }
+.twitSpec { font-size: 12px; color: #84c1da }
+

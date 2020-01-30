@@ -1,7 +1,7 @@
 import React from "react";
 import "./Noms.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight, faSave } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faArrowRight, faSave, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const Noms = props =>
   <div className="row noms">
@@ -79,7 +79,17 @@ const Noms = props =>
                 id="prev"
                 value={props.location-1} 
                 onClick={props.onBtnChange}
-              > <FontAwesomeIcon icon={faArrowLeft} /> Previous</button> 
+              > <FontAwesomeIcon icon={faArrowLeft} /> Previous</button>
+          }
+          {
+            props.cancle 
+            ? <button 
+            className="btn-sm btn-primary" 
+            id="done" 
+            value={0}
+            onClick={props.onBtnChange}
+          >  <FontAwesomeIcon icon={faTimesCircle} /> Cancle </button>
+            : null
           }  
         </div> 
         <div className="col-6 text-right">

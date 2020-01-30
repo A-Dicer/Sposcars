@@ -1,23 +1,25 @@
-.container-fluid > .row {border-bottom: 1px solid #dee2e6!important }
+.container-fluid > .row, .spoNoms {border-bottom: 1px solid #dee2e6!important }
 .col-lg-6 {
     padding: 0; margin: 0
 }
-.right > .row {height: 700px; overflow: auto;}
+/* .right > .row {overflow: auto;} */
 .fa-arrow-up {color: rgb(155, 184, 141)}
+.fa-arrow-down{color:rgb(215, 113, 113)}
 /* Leaderboard ---------------------------- */
 .leaderboard > .col-12 { padding: 0; overflow: auto; border-right: 1px solid #dee2e6!important }
 
 /* Row ----------------------------------- */
 .table { font-size: 15px }
-.table > tbody > tr > td > button {height: 10px}
+
 .table > thead > tr > th:nth-child(1) {padding-left: 15px}
 .table > thead > tr > th:nth-child(1) > svg {font-size: 12px; cursor: pointer;}
 .table > thead > tr > th:nth-child(1) > svg:hover {color: #c4b897}
 .selectedGuru {color: #84b2da}
 
-
-.selected {background-color:#f2e3bb56 }
+.table > tbody > tr > td > button {height: 10px}
+.table > tbody > .selected {background-color:#f2e3bb56 }
 .table > tbody > tr > td > .fa-user-astronaut {color: #c4b897}
+/* .table > tbody > tr:nth-of-type(odd) {background-color: #fff} */
 .table > tbody > tr > td > button > svg {color: #000; position: relative; top: -12px}
 .table > tbody > tr > td > button:hover > svg {color: rgb(215, 113, 113)}
 .btn:focus,.btn:active:focus,.btn.active:focus,
@@ -39,18 +41,40 @@
     background: url("../../assets/imgs/background1.png");
 }
 
-.categorySection > .col-12 > 
 
-/* Chat ------------------------------- */
-.chat {padding: 0; border-right: solid #a3a19a 1px;  }
-.chat > .col-12 {
+.spoNoms {padding-bottom: 5px; background: #fff}
+.spoNoms > .card-header {
     height: 50px; 
+    padding: 14px 0; 
     background: url("../../assets/imgs/background1.png");
+    margin-bottom: 5px 
+}
+.spoNoms > .card-header > h5 {font-size: 18px;}
+.spoNoms > .col-12 > .row { margin: 2px 0; font-size: 12px }
+.spoNoms > .col-12 > .row > .col-6 { padding: 0 }
+.percContainer {
+    margin: 5px 0;
+    height: 10px;
+    border-radius: 10px;
+    background-color: #e1e1e1;
+    border: 1px solid #747577!important;
+    /* overflow: hidden; */
+    padding: 0;
+    box-shadow: 1px 1px 1px #ccc;
+}
+.percColor { 
+    width: 0;
+    height: 100%;
+    background: linear-gradient(to right, rgb(138, 174, 128), rgb(160, 201, 147)); 
+    border-radius: 10px; 
+    font-size: 8px;
+    transition: ease-in-out width 3s;
+
 }
 
-.chat > .col-12 > .color {
-    /* background-color: rgb(17, 112, 196); */
-    width: 100%;
-    height: 100%;
-    opacity: .05;
+.percColor > p {
+    position: relative;
+    top: -2px;
+    right: 0 ;  
+    padding-left: 10px 
 }

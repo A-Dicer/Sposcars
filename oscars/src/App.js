@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 import Inspector from "./pages/Inspector";
 import Sposcars from "./pages/Sposcars";
+import Producer from "./pages/Producer";
 
 
 const App = () =>
@@ -15,6 +16,7 @@ const App = () =>
         <Route exact path="/Main/:id" component={Main} />
         <Route exact path="/Sposcars" component={Sposcars} />
         <Route exact path="/Inspector/" component={Inspector} />
+        <Route exact path="/Producer/Phil" component={Producer} />
         <Route component={Login} />
       </Switch>
     </div>

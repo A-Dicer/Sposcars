@@ -10,6 +10,7 @@ export default {
   register: function(user) {return axios.post("/api/users/register", user)},
   
 //------------------------------ Picks Api --------------------------------------
+  getAllPicks: function() {return axios.get("/api/picks/")}, // Gets all picks
   getPicks: function(id) {return axios.get("/api/picks/" + id)}, // Gets picks with the given id
   updatePicks: function(id, info){return axios.put("/api/picks/" + id, info)}, // updates when you "save" a split
   saveNewPicks: function(picksData) {return axios.post("/api/picks", picksData)}, // Saves new picks to the database

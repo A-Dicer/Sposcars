@@ -4,7 +4,7 @@ import Picks from "../../components/PicksSpo";
 import noms from "../../assets/js/noms.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faChevronDown, faChevronUp, faTimes, faUserAstronaut, faAward, faArrowUp, faArrowDown} from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp, faListUl, faUserAstronaut, faAward, faArrowUp, faArrowDown} from '@fortawesome/free-solid-svg-icons'
 import { faCircle , faTimesCircle, faCheckCircle} from '@fortawesome/free-regular-svg-icons'
 
 const timeConvert = (time) => {
@@ -29,7 +29,7 @@ const Profile = props =>
         {  props.user.username
             ? 
             <div className="col-12">
-                {console.log(props)}
+                {/* {console.log(props)} */}
                 <div className="text-center card-header">                  
                     <img src={props.user.img} alt="User Img" />   
                 </div>
@@ -43,16 +43,16 @@ const Profile = props =>
                         : '-'
                         }
                     <hr />
-                    <div className="col-12"> <h6> <FontAwesomeIcon icon={faAward} /> {suffix(props.user.place)} Place - <FontAwesomeIcon icon={props.user.directioin === 'Down' ? faArrowDown : faArrowUp} /> {props.user.movement}</h6>
+                    <div className="col-12"> <h6> <FontAwesomeIcon icon={faAward} /> {suffix(props.user.place)} Place {props.user.direction ? <FontAwesomeIcon icon={props.user.direction === 'down' ? faArrowDown : faArrowUp} />: null }</h6>
                         {/* {console.log(props.picks.filter((pick, i)=> pick===props.livePicks[i] && pick).length)} */}
-                    {props.user.points}pts | {Math.round((props.picks.filter((pick, i)=> pick===props.livePicks[i] && pick).length/props.livePicks.filter((pick)=> pick).length)*100)}% | Selections  <FontAwesomeIcon icon={props.picksHeight === '2px' ? faChevronUp : faChevronDown} onClick={props.picksBtn} /></div>
+                    {props.user.points}pts | <FontAwesomeIcon icon={faCheckCircle} /> {Math.round((props.picks.filter((pick, i)=> pick===props.livePicks[i] && pick).length/props.livePicks.filter((pick)=> pick).length)*100)}% | <FontAwesomeIcon icon={faListUl} /> Selections  <FontAwesomeIcon icon={props.picksHeight === 0 ? faChevronUp : faChevronDown} onClick={function(){props.picksBtn(0)}} /></div>
                 </div>
-                <div className="row picksSpo" style={{'height': props.picksHeight}}>
+                <div className="row picksSpo" id="picksSpo" style={{'height': props.picksHeight}}>
                     <div className="col-12">
                     
                         { 
                             props.picks.map((pick, i) =>
-                                <div className="row category" key={`pick${i}`}>
+                                <div className="row category" key={`pick${i}`} style={i === 0 ?{'padding-top':'10px'} : {'border-top':'solid #dfd9c9 1px'}}>
                                     <div className="">
                                     { 
                                         props.livePicks[i]  

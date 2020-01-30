@@ -11,10 +11,10 @@ const userSchema = new Schema({
   guru: { type: Boolean, default: false }, 
   password: { type: String },
   email: { type: String },
-  points: {type: Number, default: null},
-  place: {type: Number, default: null},
-  movement: {type: Number, default: null},
-  direction: {type: String, default: ''}
+  points: {type: Number, default: 0},
+  place: {type: Number, default: 0},
+  direction: {type: String, default: ''},
+  time: {type: Number, default: 0 }
 });
 
 userSchema.plugin(passLocalMon);

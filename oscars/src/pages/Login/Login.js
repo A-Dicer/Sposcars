@@ -99,13 +99,13 @@ signIn = event => {
   switch (name) {
     case "twit":
         window.location = "/api/auth/twitter/";
-                                                              break
+    break // --------------------------------------------------------
     case "user":
         this.setState({opacity: 0});
         display[0] = 'none'; display[1] = ''; display[2] = 'none';
         setTimeout(()=>{this.setState({display: display})}, 1100)
         setTimeout(()=>{this.setState({opacity: 1})}, 1300)
-                                                              break
+    break // --------------------------------------------------------
     case "login":
       if(!parseInt(this.state.users.filter((user, i)=> user.username === inputs.username.trim()).length) === 1){
         errors.login[0] = 'User Name is not found.';
@@ -122,13 +122,13 @@ signIn = event => {
       })
       .catch(err => console.log(err));
     }
-                                                            break
+    break // --------------------------------------------------------
     case "create":
         this.setState({opacity: 0});
         display[0] = 'none'; display[1] = 'none'; display[2] = '';
         setTimeout(()=>{this.setState({display: display})}, 1100)
         setTimeout(()=>{this.setState({opacity: 1})}, 1300)
-                                                              break
+    break // --------------------------------------------------------
     case "createUser":
         inputs.username = inputs.username.trim();
         inputs.password = inputs.password.trim()
@@ -139,12 +139,11 @@ signIn = event => {
           if(res.data._id)window.location = `/Main/${res.data._id}`;
         })
         .catch(err => console.log(err));
-                                  break                         
-    default: break
+    break // --------------------------------------------------------                        
+    default: break // --------------------------------------------------------
   }
 
 };
-
 
 // ----------------------------------------- Frontend Code -------------------------------------------------
   render() {

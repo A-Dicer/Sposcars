@@ -23,8 +23,6 @@ const suffix = (i) => {
     return i + "th";
   }
 
-let percCount;
-
 const Profile = props => 
     <div className="row profile" >
             <div className="col-12">

@@ -15,10 +15,10 @@ export const Leaderboard = props =>
   <table className="table  table-sm">
     <thead className="thead-dark">
       <tr>
-        <th scope="col"><FontAwesomeIcon icon={faUsers} className={props.guru ? '' : 'selectedGuru'}/>/<FontAwesomeIcon icon={faUserAstronaut} className={props.guru ? 'selectedGuru' : ''}/></th>
+        <th scope="col"><FontAwesomeIcon icon={faUsers} /></th>
         <th scope="col">Name</th>
         <th scope="col">Points</th>
-        <th scope="col">Pos</th>
+        { props.widthCheck ?<th scope="col">Pos</th> : null}
         <th scope="col">View</th>
       </tr>
     </thead>
@@ -26,10 +26,10 @@ export const Leaderboard = props =>
       { props.data.length 
           ? props.data.map((user, i)=>
               <tr key={`user${i}`} className={user.username === props.user.username ? 'selected' : null}>
-                {i > 0 && user.place === props.data[i-1].place || user.place === 0 ? <th scope="row text-right" style={{'border': 'none'}}></th> : <th scope="row text-right">{suffix(user.place)}:</th>}
+                {(i > 0 && user.place === props.data[i-1].place) || user.place === 0 ? <th scope="row text-right" style={{'border': 'none'}}></th> : <th scope="row text-right">{suffix(user.place)}:</th>}
                 <td className="text-truncate"> {user.guru ?<FontAwesomeIcon icon={faUserAstronaut} /> :null} {user.username} </td>
                 <td>{user.points}pts</td>
-                <td>{user.direction ? <FontAwesomeIcon icon={user.direction === 'down' ? faArrowDown : faArrowUp} />: null }</td> 
+                { props.widthCheck ? <td>{user.direction ? <FontAwesomeIcon icon={user.direction === 'down' ? faArrowDown : faArrowUp} />: null }</td> : null}
                 <td><button className="btn btn-sm" name={user.username} value={i} onClick={props.onClick}><FontAwesomeIcon icon={faUser} /></button></td>
               </tr>
           )

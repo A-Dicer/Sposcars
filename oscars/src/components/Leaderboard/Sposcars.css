@@ -1,8 +1,6 @@
-.container-fluid > .row, .spoNoms {border-bottom: 1px solid #dee2e6!important }
+/* .container-fluid > .row, .spoNoms {border-bottom: 1px solid #dee2e6!important } */
 .container-fluid > .row > .left {border-right: 1px solid #dee2e6!important}
-.col-lg-6 {
-    padding: 0; margin: 0
-}
+.col-lg-6 {padding: 0; margin: 0}
 /* .right > .row {overflow: auto;} */
 .fa-arrow-up {color: rgb(155, 184, 141)}
 .fa-arrow-down{color:rgb(215, 113, 113)}
@@ -24,10 +22,7 @@
 .table > tbody > tr > td > button > svg {color: #000; position: relative; top: -12px}
 .table > tbody > tr > td > button:hover > svg {color: rgb(215, 113, 113)}
 .btn:focus,.btn:active:focus,.btn.active:focus,
-.btn:focus, .btn:active:focus, .btn.active:focus{
-    outline:none;
-    box-shadow:none;
-}
+.btn:focus, .btn:active:focus, .btn.active:focus{ outline:none; box-shadow:none }
 
 .table > tbody > tr > th {padding-left: 15px}
 /* tr {height: 0px; padding: 0} */

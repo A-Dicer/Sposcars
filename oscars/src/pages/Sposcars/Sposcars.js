@@ -10,6 +10,8 @@ import {Leaderboard, Category} from "../../components/Leaderboard/";
 //check game state when arriving... √
 //mobile fixes. 
 //save siftPops data
+//selections always visable.. although it is nice to have it hidden for mobile.
+//min height for entire thing
 
 const io = require('socket.io-client')  
 const socket = io() 
@@ -55,7 +57,7 @@ class Sposcars extends Component {
 
   updateNomsFromSockets(payload) {
     if(payload.info){
-      let tempInfo = JSON.stringify(payload.info); tempInfo = JSON.parse(tempInfo)
+      let tempInfo = JSON.parse(JSON.stringify(payload.info));
 
       tempInfo.noms.forEach((pick)=>pick.perc = 0)
       this.setState({noms: tempInfo})
@@ -77,8 +79,6 @@ class Sposcars extends Component {
     
   }
   updateLeaderboardFromSockets(payload) {
-    console.log(payload)
-    
     let newUserInfo = payload.leaderboard.filter((user)=> user._id === this.state.user._id)
     let finalInfo =  payload.leaderboard.filter((user)=> user.username !== "SiftPop")
     
@@ -92,7 +92,7 @@ class Sposcars extends Component {
 
 // --------------------------------------- updateDimensions --------------------------------------------------
   updateDimensions = () => {
-    this.picksBtn(1);
+   if(this.state.width > 768) this.picksBtn(1);
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
 
@@ -181,15 +181,21 @@ class Sposcars extends Component {
         <Navbar info={this.state.user} />
         <div className="row">
           
-          <div className="col-md-8 left">
+          <div className={`col-md-8 left ${this.state.width < 768 ? ' order-2' : null}` }>
             <div className="row leaderboard">
-              <div className="col-12" style={{'height': this.state.height-50}}>
-                <Leaderboard guru={this.state.guru} data={this.state.players} user={this.state.user} onClick={this.updateUser}/>              
+              <div className="col-12" style={this.state.width > 768 ?{'height': this.state.height-50} :{'height': '400px'}}>
+                <Leaderboard 
+                  guru={this.state.guru} 
+                  data={this.state.players} 
+                  user={this.state.user} 
+                  onClick={this.updateUser}
+                  widthCheck={this.state.width > 768 ? true : false}
+                />              
               </div>
             </div>
           </div>
 
-          <div className="col-md-4 right" style={{'height': this.state.height-50}} >
+          <div className={`col-md-4 right ${(this.state.width > 768) ? ' order-1' : null}` } style={(this.state.width > 786) ?{'height': this.state.height-50}:{'height': 'inherit'}} >
             <div className="row" id="right">
               <div className="col-12" >
                 <Category oscars={this.state.noms} opacity={this.state.catOpacity} />      

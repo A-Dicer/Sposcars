@@ -1,4 +1,4 @@
-.profile {}
+.profile {transition: ease-in-out opacity 1s}
 .profile > .col-12 {margin: 0px ; padding: 0}
 .profile > .col-12 > .card-header { 
     height: 50px; 
@@ -6,19 +6,18 @@
     border-radius: 3px; 
     border: none; 
     background: url("../../assets/imgs/background1.png");
-    margin-bottom:13px 
 }
-.profile > .col-12 > .card-header > img { 
+.profile > .col-12 > .card-body {margin-top: -55px; transition: ease-in-out opacity 1s}
+.profile > .col-12 > .card-body > img { 
     border-radius: 100%; 
     width: 80px; 
     border: solid #efece3 2px; 
     position: relative; 
-    bottom: -5px 
+    top: -10px;
+    box-shadow: 1px 1px 4px #000;
 }
-.profile > .col-12 > .card-header > .fa-times {font-size: 20px; position: absolute; top: 5px; right: 15px}
-.profile > .col-12 > .card-header > .fa-times:hover {color: #d784da; cursor: pointer;}
 .profile > .col-12 > .card-body > hr {margin-top: 0px}
-.profile > .col-12 > .card-body > div > h6 {margin-bottom: 3px}
+.profile > .col-12 > .card-body > div > h6 {margin-bottom: px}
 .profile > .col-12 > .card-body > div > h6 > svg {color: #136686; font-size: 18px;}
 .profile > .col-12 > .card-body > div > h6 > .fa-arrow-up {color: rgb(155, 184, 141); font-size: 15px; position: relative; top: -1px}
 .profile > .col-12 > .card-body > div > h6 > .fa-arrow-down {color: rgb(215, 113, 113); font-size: 15px; position: relative; top: -1px}
@@ -37,12 +36,7 @@
 /* -------------------------------------------------------------------------------------------------------------- */
 
 .picksSpo {margin: 0; padding: 0; transition: ease-in-out height 1s; overflow: auto; background: #fff }
-.picksSpo > .col-12 > .category { 
-    min-width: 300px;
-    margin: 0 auto; 
-    padding: 2px;  
-}
-
+.picksSpo > .col-12 > .category { margin: 0 auto; padding: 2px }
 .picksSpo > .col-12 > .category > div {padding: 0}
 .picksSpo > .col-12 > .category > .card-text {font-size: 12px;}
 .picksSpo > .col-12 > .category > div > { font-size: 12px; padding: 0px; margin: 0px; color: #353431 }

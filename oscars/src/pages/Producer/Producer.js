@@ -3,7 +3,6 @@ import API from "../../utils/API";
 import Navbar from "../../components/Navbar";
 import Noms from "../../components/Noms";
 import Picks from "../../components/Picks";
-import Profile from "../../components/Profile";
 import noms from "../../assets/js/noms.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAstronaut, faUsers } from '@fortawesome/free-solid-svg-icons';
@@ -31,11 +30,14 @@ class Producer extends Component {
         }
 
         socket.on("inspector", (payload) => {this.updateCodeFromSockets(payload)})
+        socket.on("hello", (payload2) => {console.log(payload2)})
     }
 
 updateCodeFromSockets(payload) {this.setState({users: payload})}
 
-componentDidMount() {this.getUsers()}
+componentDidMount() {
+    this.getUsers(); 
+}
 
 // ------------------------------------------- onChange ----------------------------------------------------
     onChange = event => {
@@ -73,28 +75,25 @@ componentDidMount() {this.getUsers()}
 // ------------------------------------------ onBtnChange --------------------------------------------------
     onBtnChange = event => {
         event.preventDefault();
-        const {id, value} = event.target;
+        const {value} = event.target;
         const pos = parseInt(value);
         let data = Object.assign([], this.state.picks);
 
-        if(pos < 25){
+        if(pos < 25){ // when cancled
             this.setState({sideOpacity: 0});
-            setTimeout(()=>{this.setState({picks: data, form: false})}, 500)
-            setTimeout(()=>{
-                this.setState({sideOpacity: 1})
-                socket.emit('updateLeaderboard', this.state.picks)   
-            }, 510)
-            
+            setTimeout(()=>{this.setState({picks: data, form: false})}, 500);
+            setTimeout(()=>{this.setState({sideOpacity: 1})}, 510);
         } else {
-            this.setState({sideOpacity: 0});
             let time = Object.assign({}, this.state.time)
+
+            this.setState({sideOpacity: 0});
 
             data[24] = (parseInt(time.hour)*3600) + (parseInt(time.min)*60) + parseInt(time.sec)
         
             setTimeout(function(){
             this.setState({picks: data})
             this.setState({form: false})
-            API.updatePicks(this.state.user._id, data)
+             API.updatePicks(this.state.user._id, data)
             }.bind(this), 500) 
 
             setTimeout(()=>{
@@ -133,14 +132,8 @@ componentDidMount() {this.getUsers()}
         ).catch(err => console.log(err));
     };
     
-// ------------------------------------------- onClick ------------------------------------------------------
-// 
-    // onClick = (id, pos) => {
-    // console.log()
-    //     console.log(id)
-    // };
-    
-// ------------------------------------------ Frontend Code ------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------
+// ------------------------------------------ Frontend Code -------------------------------------------------
 
     render() {
         return (

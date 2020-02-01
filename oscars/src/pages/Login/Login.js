@@ -107,7 +107,7 @@ signIn = event => {
         setTimeout(()=>{this.setState({opacity: 1})}, 1300)
                                                               break
     case "login":
-      if(!parseInt(this.state.users.filter((user, i)=> user.username === inputs.username.trim()).length) == 1){
+      if(!parseInt(this.state.users.filter((user, i)=> user.username === inputs.username.trim()).length) === 1){
         errors.login[0] = 'User Name is not found.';
         this.setState({errors: errors});
       } else {

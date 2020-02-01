@@ -1,4 +1,5 @@
 .container-fluid > .row, .spoNoms {border-bottom: 1px solid #dee2e6!important }
+.container-fluid > .row > .left {border-right: 1px solid #dee2e6!important}
 .col-lg-6 {
     padding: 0; margin: 0
 }
@@ -6,7 +7,7 @@
 .fa-arrow-up {color: rgb(155, 184, 141)}
 .fa-arrow-down{color:rgb(215, 113, 113)}
 /* Leaderboard ---------------------------- */
-.leaderboard > .col-12 { padding: 0; overflow: auto; border-right: 1px solid #dee2e6!important }
+.leaderboard > .col-12 { padding: 0; overflow: auto; transition: height ease-in-out 1s;}
 
 /* Row ----------------------------------- */
 .table { font-size: 15px }
@@ -42,14 +43,33 @@
 }
 
 
-.spoNoms {padding-bottom: 5px; background: #fff}
+.spoNoms {padding-bottom: 5px; background: #fff; min-height: 200px}
+.spoNoms > .screen {
+    background: #fff; 
+    z-index: 1; 
+    position: absolute; 
+    right: 15px;
+    height: 100%; 
+    width: 100%; 
+    opacity: 1; 
+    transition: ease-in-out opacity 1s;
+    background: linear-gradient(to bottom, rgb(185, 185, 185), rgb(248, 248, 248))
+}
+.spoNoms > .screen > h5 {
+    background: url("../../assets/imgs/background1.png"); 
+    height: 100%;
+    font-size: 30px
+}
+.spoNoms > .screen > h5 > img {width: 100%; position: relative; top: 35px }
 .spoNoms > .card-header {
     height: 50px; 
-    padding: 14px 0; 
+    padding: 10px 0; 
     background: url("../../assets/imgs/background1.png");
-    margin-bottom: 5px 
+    margin-bottom: 5px;
+    overflow: hidden;
 }
-.spoNoms > .card-header > h5 {font-size: 18px;}
+.spoNoms > .card-header > h5 {font-size:18px; color: rgb(95, 103, 128)}
+.spoNoms > .card-header > h5 > img {height: 35px; position: relative; top: -2px}
 .spoNoms > .col-12 > .row { margin: 2px 0; font-size: 12px }
 .spoNoms > .col-12 > .row > .col-6 { padding: 0 }
 .percContainer {

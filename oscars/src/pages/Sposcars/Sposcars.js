@@ -5,87 +5,98 @@ import Profile from "../../components/ProfileSpo";
 // import noms from "../../assets/js/noms.js";
 import {Leaderboard, Category} from "../../components/Leaderboard/";
 
+
+//remove siftPop from the list. √
+//check game state when arriving... √
+//mobile fixes. 
+//save siftPops data
+
 const io = require('socket.io-client')  
 const socket = io() 
-
+let time = toString(new Date())
 class Sposcars extends Component {
   constructor(props) {
   super(props);
   this.state = {
-    noms: false,
+    catOpacity: 1,
+    proOpacity: 0,
+    height: 0,
+    width: 0,
+    start: false,
+    noms: {category: '', noms: [{movie: '', perc: 0}]},
     guru: false,
     livePicks: [],
     players: {},
-    user:  {
-      "guru": true,
-      "_id": "5e2847fd92e881001716cc8e",
-      "twitterId": "885224216005685251",
-      "username": "Andrew Dicer",
-      "__v": 0,
-      "oscar": "5e2847fd92e881001716cc8f",
-      "screenName": "@AndrewDicer",
-      "img": "https://pbs.twimg.com/profile_images/1216164245185814528/nXx3fP4B.jpg",
-      "points": 34,
-      "place": 23,
-      "movement": 2,  
-    },
-    picks: [
-      "Adam Driver, Marriage Story",
-      "Tom Hanks, A Beautiful Day in the Neighborhood",
-      "Scarlett Johansson, Marriage Story",
-      "Margot Robbie, Bombshell",
-      "Klaus",
-      "The Lighthouse",
-      "Little Women",
-      "Once upon a Time...in Hollywood",
-      "The Edge of Democracy",
-      "St. Louis Superman",
-      "Jojo Rabbit",
-      "Parasite",
-      "Joker",
-      "Star Wars: The Rise of Skywalker",
-      "(I'm Gonna) Love Me Again, Rocketman",
-      "Once upon a Time...in Hollywood",
-      "The Irishman",
-      "Kitbull",
-      "Brotherhood",
-      "Ford v Ferrari",
-      "Ad Astra",
-      "The Lion King",
-      "Jojo Rabbit",
-      "Knives Out",
-      12212
-      ],
+    user:  {},
+    picks: [],
     picksHeight: 0,
   }
     socket.on("oscarNom", (payload) => {this.updateNomsFromSockets(payload)})
     socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
+    socket.on(time, (payload) => {this.startCheck(payload)})
 }
-  updateNomsFromSockets(payload) {this.setState({noms: payload.info})}
+  componentDidMount() { 
+    this.loadUsers(); // load users
+    this.setState({ width: window.innerWidth, height: window.innerHeight }); //set width and height
+    socket.emit('startCheck', time) // socket.io to check if started
+    window.addEventListener('resize', this.updateDimensions);  //add listener
+
+  }
+
+  componentWillUnmount() {window.removeEventListener('resize', this.updateDimensions)}
+
+// ------------------------------------------- socketIO ------------------------------------------------------
+  startCheck(payload) {
+    if(payload.users.length){
+      this.setState({players: payload.users, livePicks: payload.picks })
+      this.userData(payload.users[0])
+    }
+  }
+
+  updateNomsFromSockets(payload) {
+    if(payload.info){
+      let tempInfo = JSON.stringify(payload.info); tempInfo = JSON.parse(tempInfo)
+
+      tempInfo.noms.forEach((pick)=>pick.perc = 0)
+      this.setState({noms: tempInfo})
+      
+      setTimeout(()=>{this.setState({catOpacity: 0})}, 100)
+        let time = 500;
+        tempInfo.noms.forEach((nom, i)=>{
+          setTimeout(()=> {
+            nom.perc = payload.info.noms[i].perc
+            this.setState({noms: tempInfo})
+          }, time)      
+          time = time+100;
+        }) 
+
+    } else {
+      this.setState({catOpacity: 1})
+      setTimeout(()=>{this.setState({noms: {category: '', noms: [{movie: '', perc: 0}]}})}, 1000)
+    }
+    
+  }
   updateLeaderboardFromSockets(payload) {
+    console.log(payload)
+    
     let newUserInfo = payload.leaderboard.filter((user)=> user._id === this.state.user._id)
+    let finalInfo =  payload.leaderboard.filter((user)=> user.username !== "SiftPop")
+    
     this.userData(newUserInfo[0])
+    
     this.setState({
-      players: payload.leaderboard, 
+      players: finalInfo, 
       livePicks: payload.picks
     })
   }
 
-  componentDidMount() { 
-    this.loadUsers(); 
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
-    window.addEventListener('resize', this.updateDimensions); 
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions);
-  }
-
+// --------------------------------------- updateDimensions --------------------------------------------------
   updateDimensions = () => {
     this.picksBtn(1);
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
 
+// ------------------------------------------- userData ------------------------------------------------------
   userData = (user) => {
     if(user.twitterId){
       API.getTwitter(user.twitterId)
@@ -99,38 +110,53 @@ class Sposcars extends Component {
       user.img = "https://abs.twimg.com/sticky/default_profile_images/default_profile.png"
       this.setState({user: user})
     }
-  }
-
-  onClick = event => {
-    event.preventDefault()
-    let {value, name} = event.target;
-
-    let data =  Object.assign({}, this.state.players[value])
-    if(data.twitterId){
-      API.getTwitter(this.state.players[value].twitterId)
-        .then(res => {
-          data.screenName = `@${res.data.results.screenName}`;
-          data.img = res.data.results.img
-          this.setState({user: data})
-        })
+    API.getPicks(user._id)
+        .then(res => {this.setState({picks: res.data.results.picks})})
         .catch(err => console.log(err))
-    } else {
-      data.img = "https://abs.twimg.com/sticky/default_profile_images/default_profile.png"
-      this.setState({user: data})
-    }
-
-    API.getPicks(this.state.players[value]._id)
-      .then(res => {this.setState({picks: res.data.results.picks})})
-      .catch(err => console.log(err))
-    
   }
 
+// ------------------------------------------ updateUser -----------------------------------------------------
+  updateUser = event => {
+    event.preventDefault()
+    let {value} = event.target;
+    let data =  Object.assign({}, this.state.players[value])
+    this.setState({proOpacity: 0})
+
+    setTimeout(()=>{
+      if(data.twitterId){
+        API.getTwitter(this.state.players[value].twitterId)
+          .then(res => {
+            data.screenName = `@${res.data.results.screenName}`;
+            data.img = res.data.results.img
+            this.setState({user: data})
+          })
+          .catch(err => console.log(err))
+      } else {
+        data.img = "https://abs.twimg.com/sticky/default_profile_images/default_profile.png"
+        this.setState({user: data})
+      }
+  
+      API.getPicks(this.state.players[value]._id)
+        .then(res => {this.setState({picks: res.data.results.picks})})
+        .catch(err => console.log(err))
+    }, 1100)
+
+    setTimeout(()=>{this.setState({proOpacity: 1})}, 1200)
+  }
+
+// ------------------------------------------ loadUsers ------------------------------------------------------
   loadUsers = () => {
     API.getUsers()
-      .then(res => {this.setState({players: res.data.results})})
+      .then(res => {
+        let users = res.data.results.filter((user)=> user.username !== "SiftPop")
+        this.userData(users[0])
+        this.setState({players: users})
+        setTimeout(()=>{this.setState({proOpacity: 1})},500)
+      })
       .catch(err => console.log(err));
   };
 
+// ------------------------------------------- picksBtn ------------------------------------------------------
   picksBtn = (thing) => {
  
     let offsetHeight = document.getElementById('right').offsetHeight;
@@ -146,39 +172,38 @@ class Sposcars extends Component {
       this.setState({picksHeight: height})
     }
   }
-
+  
+// -----------------------------------------------------------------------------------------------------------
+// ----------------------------------------- Frontend Code ---------------------------------------------------  
   render() {
     return (
       <div className="container-fluid" style={{"opacity": this.state.opacity}}>
         <Navbar info={this.state.user} />
         <div className="row">
           
-          <div className="col-sm-8 left">
+          <div className="col-md-8 left">
             <div className="row leaderboard">
               <div className="col-12" style={{'height': this.state.height-50}}>
-                <Leaderboard guru={this.state.guru} data={this.state.players} user={this.state.user} onClick={this.onClick}/>              
+                <Leaderboard guru={this.state.guru} data={this.state.players} user={this.state.user} onClick={this.updateUser}/>              
               </div>
             </div>
           </div>
 
-          <div className="col-sm-4 right" style={{'height': this.state.height-50}} >
+          <div className="col-md-4 right" style={{'height': this.state.height-50}} >
             <div className="row" id="right">
               <div className="col-12" >
-                {
-                  this.state.noms ? <Category oscars={this.state.noms}/> : null
-                }
-                
+                <Category oscars={this.state.noms} opacity={this.state.catOpacity} />      
               </div>
               <div className="col-12">
-                <Profile 
+                <Profile
+                  opacity={this.state.proOpacity}
+                  start={this.state.start}
                   user={this.state.user} 
                   picks={this.state.picks}
                   livePicks={this.state.livePicks} 
                   picksBtn={this.picksBtn}
                   picksHeight={this.state.picksHeight}
                 />
-                {/* clicked user profile <Profile /> */}
-                {/* polls?*/}
               </div>
             </div>
           </div>

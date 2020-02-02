@@ -9,20 +9,17 @@ var client = new Twitter({
 });
 
 module.exports = {
-    findAll: function (req, res) {
-        
-            
-            const params = {user_id: req.params.id};
-            const path = "https://api.twitter.com/1.1/users/show.json?"
-            client.get(path, params, function(error, user, response) {
-              if (!error) {
-                  let data = new Object;
-                  data.screenName = user.screen_name
-                  data.img = user.profile_image_url.replace("_normal", "")          
-                  
-                res.json({results: data, pass: req.session.passport});
-              } else console.log(error)
-            });
-       
-    },
+    findAll: function (req, res) {  
+        const params = {user_id: req.params.id};
+        const path = "https://api.twitter.com/1.1/users/show.json?"
+        client.get(path, params, function(error, user, response) {
+            if (!error) {
+                let data = new Object;
+                data.screenName = user.screen_name
+                data.img = user.profile_image_url.replace("_normal", "")          
+                
+            res.json({results: data, pass: req.session.passport});
+            } else console.log(error)
+        });  
+    }
 };

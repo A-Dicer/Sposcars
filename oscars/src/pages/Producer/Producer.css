@@ -1,9 +1,11 @@
+.cont { height: 500px; overflow: auto; padding: 0; border: 1px solid #dee2e6!important }
+.proProfile > .col-12 > .row > .card-body {padding-left: 0; padding-right: 0; margin: 5px}
+.proProfile > .col-12 > .row > .card-body > .row > .col-4 > h5 {padding-left: 15px; padding-top: 3px}
+.cont > .inspect:nth-of-type(odd){background-color: #fff }
+.cont > .inspect:nth-of-type(even){background-color: rgb(237, 237, 237) }
+.cont > .inspect {padding-left: 15px; padding-top: 0; cursor: pointer;}
+.cont > .inspect:hover .svg {color: #000; }
+.cont > .inspect > .svg {font-size: 10px; vertical-align: none; color: rgb(220, 220, 220)}
 
-.inspect { font-size: 14px }
-.inspect > hr {margin: 2px 0}
-.inspect-head > h5 { margin-top: 12px }
-.inspect > div { margin: 0px }
-.guru { cursor: pointer }
-.inspect-head > h5 > .twitSpec { font-size: 18px }
-.twitSpec { font-size: 12px; color: #84c1da }
+/* .proCat > .col-12:nth-child(1) {} */
 

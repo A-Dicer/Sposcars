@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Navbar from "../../components/Navbar";
 import Noms from "../../components/Noms";
-import Picks from "../../components/Picks";
+import Picks from "../../components/ProPicks";
 import noms from "../../assets/js/noms.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserAstronaut, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faUserAstronaut, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-regular-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import "./Producer.css";
@@ -82,7 +82,7 @@ componentDidMount() {
         if(pos < 25){ // when cancled
             this.setState({sideOpacity: 0});
             setTimeout(()=>{this.setState({picks: data, form: false})}, 500);
-            setTimeout(()=>{this.setState({sideOpacity: 1})}, 510);
+            setTimeout(()=>{this.setState({sideOpacity: 1, pos: ''})}, 510);
         } else {
             let time = Object.assign({}, this.state.time)
 
@@ -139,36 +139,58 @@ componentDidMount() {
         return (
             <div className="container-fluid">
                 <Navbar />
-                <div className="row">
-                    <div className="col-6">
-                        <div className="row profile">
-                            <div className="card">
-                                <div className="card-header inspect-head text-center"> 
-                                    <h5>
-                                      Players: <FontAwesomeIcon icon={faUsers} /> {this.state.users.filter(user => !user.guru).length} / <FontAwesomeIcon icon={faTwitter} className='twitSpec'/> {this.state.users.filter(user => !user.guru && user.twitterId).length} 
-                                    </h5>
-                                </div>
-                                <div className="card-body">
+                <div className="row producer">
+                    <div className="col-md-6 proProfile">
+                            <div className="col-12">
+                                <div className="row">
+                                    <div className="card-body">
+                                        <div className="row">
+                                            <div className='col-4'>
+                                                <h5>
+                                                    <FontAwesomeIcon icon={faEye} /> {this.state.users.filter(user => !user.guru).length} 
+                                                </h5> 
+                                            </div>
+                                            <div className="col-8">
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                <div class="input-group-text"><FontAwesomeIcon icon={faSearch} /></div>
+                                                </div>
+                                                <input type="text" class="form-control form-control-sm" id="" placeholder="Search" />
+                                            </div>                                            
+                                            </div>
+                                        </div>
+                                        <div className="col-12 cont">
+                                
                                     { 
                                         this.state.users.map((user, i) => 
                                             <div className="inspect" key={`row${i}`} >
-                                                <div className=" "> 
-                                                    <FontAwesomeIcon icon={faEye} /> {`${user.username}   `} 
-                                                   {user.guru ? <FontAwesomeIcon  className={`guru`}  icon={faUserAstronaut}/> : null}  {user.twitterId ? <FontAwesomeIcon className={`twitSpec`} icon={faTwitter}/> : null }
-                                                </div>
                                                 
-                                                <hr/>
+                                                    <FontAwesomeIcon icon={faUser} className="svg"/> {`${user.username}   `} 
+                                                   {user.guru ? <FontAwesomeIcon  className={`guru`}  icon={faUserAstronaut}/> : null}  {user.twitterId ? <FontAwesomeIcon className={`twitSpec`} icon={faTwitter}/> : null }
+                                                
+                             
                                             </div>        
                                         )           
                                     } 
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>  
+                         
                     </div>
                     
-                            <div className="col-md-6 rightSide" style={{"opacity": this.state.sideOpacity}}>
-                            {
-                            this.state.form 
+                    <div className="col-md-6 proCat" style={{"opacity": 1}}>
+                        <div className="col-12">
+                            <Picks 
+                                user={this.state.user} 
+                                picks={this.state.picks}
+                                oscars={this.state.oscars}
+                                edit={this.editPick}
+                                pos={this.state.pos}
+                            />
+                        </div>
+                        <div className="col-12">
+                            { this.state.form 
                             ? 
                                 <Noms 
                                 oscars={this.state.oscars[this.state.pos]} 
@@ -182,14 +204,12 @@ componentDidMount() {
                                 edit={this.state.edit}
                                 cancle={true}
                                 />
-                            : <Picks 
-                                user={this.state.user} 
-                                picks={this.state.picks}
-                                oscars={this.state.oscars}
-                                edit={this.editPick}
-                                />
-                            }
-                            </div> 
+                            : null }
+                        </div>
+                    
+                    
+                    
+                    </div> 
                      
                 </div>     
             </div>

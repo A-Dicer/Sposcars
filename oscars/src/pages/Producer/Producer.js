@@ -91,9 +91,8 @@ class Producer extends Component {
     componentDidMount() {
         this.getUsers(); 
         socket.emit('startCheck', time) // socket.io to check if started
-        socket.emit('connect')
     }
-    
+
     componentWillUnmount() {socket.emit('disconnect')}
 // -------------------------------------------- suffix ------------------------------------------------------
     suffix = (i) => {

@@ -1,6 +1,5 @@
 const db = require("./models");
 let dataPrev = []; let picksBackup; 
-let viewers = 0;
 
 //--------------------------------------- sort -----------------------------------------
 const sort =(data)=>{
@@ -39,11 +38,9 @@ const direction =(data)=>{
 
 exports = module.exports = function(io) {  
   io.on('connection', (socket) => {  // Set socket.io listeners ------------------------
-    socket.on('connect', function(){ viewers++; io.sockets.emit('visitors', viewers)})
-    socket.on('disconnect', function(){ viewers--; io.sockets.emit('visitors', viewers)})
-
-    // io.sockets.emit('visitors', io.engine.clientsCount)
-    // io.on.disconect(console.log('gone'))
+    io.sockets.emit('visitors', Math.round(io.engine.clientsCount/4))
+    socket.on('disconnect', function(){io.sockets.emit('visitors', Math.round(io.engine.clientsCount/4))})
+    
 //------------------------------------ startCheck --------------------------------------   
     socket.on('startCheck', function(data){
       socket.emit(data, {users: dataPrev, picks: picksBackup})

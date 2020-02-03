@@ -6,6 +6,8 @@
 .cont > .inspect {padding-left: 15px; padding-top: 0; cursor: pointer;}
 .cont > .inspect:hover .svg {color: #000; }
 .cont > .inspect > .svg {font-size: 10px; vertical-align: none; color: rgb(220, 220, 220)}
-
-/* .proCat > .col-12:nth-child(1) {} */
+.cont > .inspect > svg:nth-of-type(2) {color: #619ebf; font-size: 13px;}
+#searchInput:focus{ outline:none; box-shadow:none }
+.fa-search {color: #619ebf}
+.proCat {padding-top: 25px;}
 

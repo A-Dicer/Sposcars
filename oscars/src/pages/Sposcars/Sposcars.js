@@ -41,11 +41,11 @@ class Sposcars extends Component {
     this.loadUsers(); // load users
     this.setState({ width: window.innerWidth, height: window.innerHeight }); //set width and height
     socket.emit('startCheck', time) // socket.io to check if started
+    socket.emit('connect');
     window.addEventListener('resize', this.updateDimensions);  //add listener
-
   }
 
-  componentWillUnmount() {window.removeEventListener('resize', this.updateDimensions)}
+  componentWillUnmount() {window.removeEventListener('resize', this.updateDimensions); socket.emit('disconnect')}
 
 // ------------------------------------------- socketIO ------------------------------------------------------
   startCheck(payload) {

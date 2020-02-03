@@ -1,5 +1,6 @@
 const db = require("./models");
 let dataPrev = []; let picksBackup; 
+let viewers = 0;
 
 //--------------------------------------- sort -----------------------------------------
 const sort =(data)=>{
@@ -38,7 +39,11 @@ const direction =(data)=>{
 
 exports = module.exports = function(io) {  
   io.on('connection', (socket) => {  // Set socket.io listeners ------------------------
+    socket.on('connect', function(){ viewers++; io.sockets.emit('visitors', viewers)})
+    socket.on('disconnect', function(){ viewers--; io.sockets.emit('visitors', viewers)})
 
+    // io.sockets.emit('visitors', io.engine.clientsCount)
+    // io.on.disconect(console.log('gone'))
 //------------------------------------ startCheck --------------------------------------   
     socket.on('startCheck', function(data){
       socket.emit(data, {users: dataPrev, picks: picksBackup})
@@ -57,9 +62,9 @@ exports = module.exports = function(io) {
           let pickAmt =  picks.filter((pick)=> pick.picks[data.pos] === choice.movie)
             choice.perc = `${Math.round((pickAmt.length/picks.length)*100)}%`
           })
-          socket.broadcast.emit("oscarNom", data)
+          io.sockets.emit("oscarNom", data)
         })
-      } else socket.broadcast.emit("oscarNom", false)
+      } else io.sockets.emit("oscarNom", false)
     });
 
 //--------------------------------- leaderboardUpdate ----------------------------------  
@@ -80,7 +85,7 @@ exports = module.exports = function(io) {
               dataCurrent = sort(dataCurrent)//sort
               dataCurrent = postion(dataCurrent, 'time')//find position     
               dataCurrent = direction(dataCurrent)//movement
-              socket.broadcast.emit("leaderboardInfo", {"leaderboard": dataCurrent, "picks": data}) 
+              io.sockets.emit("leaderboardInfo", {"leaderboard": dataCurrent, "picks": data}) 
             }, 200) 
             
           } else {
@@ -97,7 +102,7 @@ exports = module.exports = function(io) {
               dataCurrent = sort(dataCurrent)//sort
               dataCurrent = postion(dataCurrent, 'points')//find position
               if(data.filter(res => res).length > 1)dataCurrent = direction(dataCurrent)//movement        
-              socket.broadcast.emit("leaderboardInfo", {"leaderboard": dataCurrent, "picks": data})
+              io.sockets.emit("leaderboardInfo", {"leaderboard": dataCurrent, "picks": data})
               dataPrev = Object.assign([], dataCurrent)
             }, 200)    
           }    

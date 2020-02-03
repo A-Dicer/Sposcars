@@ -1,20 +1,12 @@
-/* 
-.picks > .card { padding: 3px; margin: 5px 15px; width: 35rem;  padding-bottom: 0 }
-.picks > .card > .card-header { 
-    height: 50px;
-    border: none;
-    background-image: url("../../assets/imgs/background1.png");
-    transition: ease-in-out opacity 1s
-}
 
-.picks > .card > .card-body > h4 { font-size: 20px }
-
-.picks > .card > .card-body > .card-text  { font-size: 12px; padding: 3px; margin-bottom: 0px; color: #353431 }
-.picks > .card > .card-body > .card-text > div { font-size: 12px; margin: 0; color: #a3a19a }
-.picks > .card > .card-body > .card-text  > hr { padding: 0; margin: 0px } */
 
 .proPicks {font-size: 13px}
-.proPicks > .col-12 > .card-body > .card-text {transition: ease-in-out font-size 300ms; cursor: pointer; width: fit-content}
-.proPicks > .col-12 > .card-body > .card-text > svg { color: rgb(220, 220, 220); padding-bottom: 1px; }
-.proPicks > .col-12 > .card-body > .card-text:hover > svg {color: #353431}
-
+.proPicks > .col-12 > .card-body > .card-text > {}
+.proPicks > .col-12 > .card-body > .card-text > .testDiv {width: fit-content; cursor: pointer; transition: ease-in-out font-size 300ms}
+.proPicks > .col-12 > .card-body > .card-text > .testDiv > svg { color: rgb(220, 220, 220); padding-bottom: 1px; }
+.proPicks > .col-12 > .card-body > .card-text> .testDiv:hover > svg {color: #353431}
+.formSelections {padding-left: 15px; height: 0; transition: ease-in-out height 1s; overflow: hidden; font-size: 13px;}
+.formSelections > .form-check {margin-top: 0; height: 16px}
+.testDiv > .fa-times-circle {color: #bd2130!important; cursor: pointer}
+.testDiv > .fa-times-circle:hover {color: #7c141e!important}
+.catSelected {font-size: 20px ; color: #a72b2b; cursor: default!important}

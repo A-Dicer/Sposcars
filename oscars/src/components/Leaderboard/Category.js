@@ -14,7 +14,7 @@ export const Category = props =>
         <div className='col-12'>
             {
             props.oscars.noms.map((nom, i) =>
-                <div className='row'> 
+                <div className='row' key={`nom${i}`}> 
                     <div className='col-6 text-truncate text-center'>
                      {nom.movie}
                     </div>

@@ -1,12 +1,15 @@
 .cont { height: 500px; overflow: auto; padding: 0; border: 1px solid #dee2e6!important }
 .proProfile > .col-12 > .row > .card-body {padding-left: 0; padding-right: 0; margin: 5px}
 .proProfile > .col-12 > .row > .card-body > .row > .col-4 > h5 {padding-left: 15px; padding-top: 3px}
-.cont > .inspect:nth-of-type(odd){background-color: #fff }
-.cont > .inspect:nth-of-type(even){background-color: rgb(237, 237, 237) }
-.cont > .inspect {padding-left: 15px; padding-top: 0; cursor: pointer;}
-.cont > .inspect:hover .svg {color: #000; }
-.cont > .inspect > .svg {font-size: 10px; vertical-align: none; color: rgb(220, 220, 220)}
-.cont > .inspect > svg:nth-of-type(2) {color: #619ebf; font-size: 13px;}
+.cont > .row:nth-of-type(odd){background-color: #fff }
+.cont > .row:nth-of-type(even){background-color: rgb(237, 237, 237) }
+.cont > .row {padding-left: 15px; padding-top: 0; cursor: pointer;}
+.cont > .row:hover .inspect > .svg {color: #000; }
+.cont > .row > .inspect > .svg {font-size: 10px; vertical-align: none; color: rgb(220, 220, 220)}
+.cont > .row > .inspect > svg:nth-of-type(2) {color: #619ebf; font-size: 13px;}
+.cont > .row > .col-6 > select {height: 100%; font-size: 13px; background:none; border: none; margin: 0; padding: 0}
+.cont > .row > .col-6 > select:focus {box-shadow: none;}
+.cont > .selected {background: #d8c4df!important} 
 #searchInput:focus{ outline:none; box-shadow:none }
 .fa-search {color: #619ebf}
 .proCat {padding-top: 25px;}

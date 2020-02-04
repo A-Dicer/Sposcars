@@ -5,7 +5,8 @@ import Main from "./pages/Main";
 import Inspector from "./pages/Inspector";
 import Sposcars from "./pages/Sposcars";
 import Producer from "./pages/Producer";
-
+import Leaderboard from "./pages/LeaderBoardPage";
+// import Players from "./pages/LeaderBoardPage";
 
 const App = () =>
   <Router>
@@ -17,6 +18,9 @@ const App = () =>
         <Route exact path="/Sposcars" component={Sposcars} />
         <Route exact path="/Inspector/" component={Inspector} />
         <Route exact path="/Producer/Phil" component={Producer} />
+        {/* <Route exact path="/Producer/Players" component={Players} /> */}
+        {/* <Route exact path="/Producer/Category" component={Category} /> */}
+        <Route exact path="/Producer/Leaderboard" component={Leaderboard} />
         <Route component={Login} />
       </Switch>
     </div>

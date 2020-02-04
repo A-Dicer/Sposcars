@@ -11,6 +11,7 @@
 .profile > .col-12 > .card-body > img { 
     border-radius: 100%; 
     width: 80px; 
+    height: 80px;
     border: solid #efece3 2px; 
     position: relative; 
     top: -10px;

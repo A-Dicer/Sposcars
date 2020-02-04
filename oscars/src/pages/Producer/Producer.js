@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Picks from "../../components/ProPicks";
+import Profile from "../../components/ProProfile"
 import noms from "../../assets/js/noms.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAstronaut, faSearch, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
@@ -30,22 +31,19 @@ class Producer extends Component {
             form: false,
             edit: false,
             search: '',
-            visitors: 0
+            visitors: 0,
+            player: { player: {oscar:[]}, opacity: 0},
         }
         
         socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
-        // socket.on("inspector", (payload) => {this.updateCodeFromSockets(payload)})
         socket.on("playerDisplay", (payload) => {this.playerUpdate(payload)})
         socket.on("visitors", (payload) => {this.visitorsUpdate(payload)})
         socket.on("oscarNom", (payload) => {this.nomUpdate(payload)})
         socket.on(time, (payload) => {this.startCheck(payload)})
     }
 
-    // updateCodeFromSockets(payload) {this.setState({users: payload})}
-    playerUpdate(payload){
-        console.log(payload)
-    }
-    visitorsUpdate(payload){this.setState({visitors: payload}); console.log(`visitors: ${payload}`)}
+    playerUpdate(payload){this.setState({player: payload})}
+    visitorsUpdate(payload){this.setState({visitors: payload})}
     updateLeaderboardFromSockets(payload) {
         let finalInfo =  payload.leaderboard.filter((user)=> user.username !== "SiftPop")
         
@@ -84,7 +82,8 @@ class Producer extends Component {
 
     startCheck(payload) {
         if(payload.users.length){
-          this.setState({usersData: payload.users, users:payload.users, picks: payload.picks })
+          let data = payload.users.filter((user)=> user.username !== "SiftPop")
+          this.setState({usersData: data, users:data, picks: payload.picks })
         }
     }
 
@@ -182,8 +181,10 @@ class Producer extends Component {
 
 // ---------------------------------------- playerChange ---------------------------------------------------
     playerChange = (data) => {
-        console.log('lol')
-        console.log(this.state.users[data])
+        let user = this.state.usersData.filter((user, i)=> user.username === data)
+        user[0]
+        ?socket.emit('playerInfo', {player: user[0], opacity: 1}) 
+        :socket.emit('playerInfo', {player: {oscar:[]}, opacity: 0})      
     }
 
 // ------------------------------------------- editPick ----------------------------------------------------
@@ -199,11 +200,11 @@ class Producer extends Component {
 // ------------------------------------------- getUsers -----------------------------------------------------
 //Get the users 
     getUsers = () => {
-        console.log('getUsers')
         API.getUsers()
-            .then(res => {
+            .then(res => {  
                 let siftPop = res.data.results.filter(user => user.username === "SiftPop")
-                this.setState({users: res.data.results, picks: siftPop[0].oscar.picks, user: siftPop, usersData: res.data.results})
+                let data = res.data.results.filter((user)=> user.username !== "SiftPop")
+                this.setState({users: data, picks: siftPop[0].oscar.picks, user: siftPop[0], usersData: data})
             }
         ).catch(err => console.log(err));
     };
@@ -236,16 +237,22 @@ class Producer extends Component {
                                             </div>                                            
                                         </div>
                                     </div>
+                                    <div className="col-12 border" style={{'marginBottom': '15px'}}>
+                                        <Profile user={this.state.player.player} opacity={this.state.player.opacity} onClick={this.playerChange }/>
+                                    </div>
                                     <div className="col-12 cont">
+         
                                         {this.state.users.map((user, i) => 
-                                            <div className="inspect" key={`row${i}`} onClick={function(){this.playerChange()}.bind(this)}>     
-                                                {this.suffix(user.place)}: <FontAwesomeIcon icon={faUser} className="svg"/> {user.points}pts / {`${user.username}   `} 
-                                                {user.guru ? <FontAwesomeIcon  className={`guru`}  icon={faUserAstronaut}/> : null} 
-                                            </div>        
-                                        )} 
+                                            <div className={`row ${user.username === this.state.player.player.username ? 'selected':''}`} key={`row${i}`} onClick={function(){this.playerChange(user.username)}.bind(this)}>
+                                                <div className="inspect text-truncate col-12"  >     
+                                                    {this.suffix(user.place)}: <FontAwesomeIcon icon={faUser} className="svg"/> {user.points}pts / {`${user.username}`} {user.guru ? <FontAwesomeIcon  className={`guru`}  icon={faUserAstronaut}/> : null}
+                                                </div>
+                                            </div>       
+                                        )}
+                                        
                                     </div>
                                     <FontAwesomeIcon icon={faUsers} /> {this.state.users.length} / <FontAwesomeIcon icon={faEye} /> {this.state.visitors} 
-                                </div>
+                                </div>   
                             </div>
                         </div>      
                     </div>

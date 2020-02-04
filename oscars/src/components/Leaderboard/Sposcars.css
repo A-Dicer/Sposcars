@@ -66,7 +66,7 @@
 .spoNoms > .card-header > h5 {font-size:18px; color: rgb(95, 103, 128)}
 .spoNoms > .card-header > h5 > img {height: 35px; position: relative; top: -2px}
 .spoNoms > .col-12 > .row { margin: 2px 0; font-size: 12px }
-.spoNoms > .col-12 > .row > .col-6 { padding: 0 }
+.spoNoms > .col-12 > .row > .text-truncate {padding-top: 1px}
 .percContainer {
     margin: 5px 0;
     height: 10px;

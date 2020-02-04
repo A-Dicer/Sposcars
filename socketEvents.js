@@ -1,5 +1,40 @@
 const db = require("./models");
-let dataPrev = []; let picksBackup; 
+let dataPrev = []; let picksBackup = [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+  ]
+var Twitter = require('twitter');
+ 
+var client = new Twitter({
+  consumer_key: 'cTG2wQqlTod844vZh4KkogaAb',
+  consumer_secret: 'gV6Qb3PRwtxpL6y9Nj6HNImbTpf9ah6hfBXrvVHOVNudRN5nvJ',
+  access_token_key: '885224216005685251-ISjjWOj0amarhPuckHetW8xPjqqSS4X',
+  access_token_secret: 'FTOtAMd18v1dG91JSk5fiJk2Jfexh8Ey5qXFdgpou2GII'
+});
+
 
 //--------------------------------------- sort -----------------------------------------
 const sort =(data)=>{
@@ -39,8 +74,35 @@ const direction =(data)=>{
 exports = module.exports = function(io) {  
   io.on('connection', (socket) => {  // Set socket.io listeners ------------------------
     io.sockets.emit('visitors', Math.round(io.engine.clientsCount/4))
-    socket.on('disconnect', function(){io.sockets.emit('visitors', Math.round(io.engine.clientsCount/4))})
-    
+    socket.on('disconnect', function(){io.sockets.emit('visitors', Math.round(io.engine.clientsCount/4)); console.log("disconnect")})
+
+//------------------------------------ playerInfo -------------------------------------- 
+    socket.on('playerInfo', function(data){
+      if(data.opacity === 0) {io.sockets.emit('playerDisplay', data)}
+      else {
+        newData = Object.assign({}, data.player)
+        db.Picks.findOne({"username": newData._id}, function(err, oscar){
+          newData.oscar = oscar.picks
+          newData.pickPerc = Math.round((newData.oscar.filter((pick, i)=> pick=== picksBackup[i] && pick).length/picksBackup.filter((pick)=> pick).length)*100)
+          
+          if(newData.twitterId){
+            const params = {user_id: newData.twitterId};
+            const path = "https://api.twitter.com/1.1/users/show.json?"
+            client.get(path, params, function(error, user, response) {
+                if (!error) {         
+                    newData.screenName = user.screen_name
+                    newData.img = user.profile_image_url.replace("_normal", "")
+                    io.sockets.emit('playerDisplay', {player: newData, opacity: data.opacity})
+                
+                } else console.log(error)
+            });
+          } else {
+            newData.img = "https://abs.twimg.com/sticky/default_profile_images/default_profile.png"
+            io.sockets.emit('playerDisplay', {player: newData, opacity: data.opacity})
+          }
+        })
+      }
+    })
 //------------------------------------ startCheck --------------------------------------   
     socket.on('startCheck', function(data){
       socket.emit(data, {users: dataPrev, picks: picksBackup})

@@ -1,0 +1,34 @@
+.profileOver {
+    /* transition: ease-in-out opacity 1s; */
+    background: url("../../assets/imgs/background1.png");
+}
+.profileOver > .cancle {position: absolute; right: 5px; top: 5px; color: #bd2130; font-size: 18px; cursor: pointer; z-index: 2;}
+.profileOver > .cancle:hover {color: #a04147}
+.profileOver > .col-3 {padding-left: 5px}
+.profileOver > .col-3 > img { 
+    border-radius: 100%; 
+    width: 150px; 
+    height: 150px;
+    border: solid #efece3 2px; 
+    position: relative; 
+    margin: 5px auto;
+    box-shadow: 1px 1px 4px #000;
+    z-index: 1;
+}
+/* .profileOver > .col-9 > .card-body > .card-title {font-size: 25px} */
+/* .profileOver > .col-9 > .card-body > .card-title */
+.profileOver > .col-9 {padding-right: 0}
+.profileOver > .col-9 > .card-body {padding-right: 0}
+.profileOver > .col-9 > .card-body > hr {margin-top: 0px}
+.profileOver > .col-9 > .card-body > div > h6 {font-size: 16px}
+.profileOver > .col-9 > .card-body > div > h6 > svg {color: #136686; font-size: 18px;}
+.profileOver > .col-9 > .card-body > div > h6 > .fa-arrow-up {color: rgb(155, 184, 141); font-size: 15px; position: relative; top: -1px}
+.profileOver > .col-9 > .card-body > div > h6 > .fa-arrow-down {color: rgb(215, 113, 113); font-size: 15px; position: relative; top: -1px}
+.profileOver > .col-9 > .card-body > .div {margin-bottom: -5px; font-size: 18px}
+
+/* .profileOver > .col-9 > .card-body {font-size: 20px} */
+.profileOver > .col-9 > .card-body > h4 { font-size: 20px}
+.profileOver > .col-9 > .card-body > h4 > svg { font-size: 16px; color: #a3a19a; position: relative; top: -3px}
+.profileOver > .col-9 > .card-body > a { position: relative; top: -13px; font-size: 17px; color: #a3a19a }
+.profileOver > .col-9 > .card-body > a:hover > svg {color: #84c1da}
+

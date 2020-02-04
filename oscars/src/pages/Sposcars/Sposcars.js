@@ -13,9 +13,9 @@ import {Leaderboard, Category} from "../../components/Leaderboard/";
 //selections always visable.. although it is nice to have it hidden for mobile.
 //min height for entire thing
 
-const io = require('socket.io-client')  
-const socket = io() 
+let socket 
 let time = toString(new Date())
+
 class Sposcars extends Component {
   constructor(props) {
   super(props);
@@ -33,11 +33,15 @@ class Sposcars extends Component {
     picks: [],
     picksHeight: 0,
   }
+    
+}
+  componentDidMount() { 
+    const io = require('socket.io-client')  
+    socket = io()
     socket.on("oscarNom", (payload) => {this.updateNomsFromSockets(payload)})
     socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
     socket.on(time, (payload) => {this.startCheck(payload)})
-}
-  componentDidMount() { 
+     
     this.loadUsers(); // load users
     this.setState({ width: window.innerWidth, height: window.innerHeight }); //set width and height
     socket.emit('startCheck', time) // socket.io to check if started

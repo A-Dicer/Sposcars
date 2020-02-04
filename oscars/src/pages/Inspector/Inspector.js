@@ -6,8 +6,7 @@ import { faUserAstronaut, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import "./Inspector.css";
 
-const io = require('socket.io-client')  
-const socket = io() 
+let socket; 
 
 class Inspector extends Component {
     constructor(props) {
@@ -15,14 +14,17 @@ class Inspector extends Component {
         this.state = {
             users: []
         }
-
-        socket.on("inspector", (payload) => {this.updateCodeFromSockets(payload)})
     }
 
 updateCodeFromSockets(payload) {this.setState({users: payload})}
 
     
-componentDidMount() {this.getUsers()}
+componentDidMount() {
+    const io = require('socket.io-client')  
+    socket = io() 
+    socket.on("inspector", (payload) => {this.updateCodeFromSockets(payload)})
+    this.getUsers()
+}
 
 // ------------------------------------------- getUsers -----------------------------------------------------
 //Get the users 

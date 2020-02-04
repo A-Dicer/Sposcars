@@ -8,9 +8,8 @@ import { faUserAstronaut, faSearch, faUser, faUsers } from '@fortawesome/free-so
 import { faEye } from '@fortawesome/free-regular-svg-icons'
 import "./Producer.css";
 import {Category} from "../../components/Leaderboard/";
+let socket;
 
-const io = require('socket.io-client')  
-const socket = io() 
 const time = toString(new Date())
 
 class Producer extends Component {
@@ -34,12 +33,6 @@ class Producer extends Component {
             visitors: 0,
             player: { player: {oscar:[]}, opacity: 0},
         }
-        
-        socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
-        socket.on("playerDisplay", (payload) => {this.playerUpdate(payload)})
-        socket.on("visitors", (payload) => {this.visitorsUpdate(payload)})
-        socket.on("oscarNom", (payload) => {this.nomUpdate(payload)})
-        socket.on(time, (payload) => {this.startCheck(payload)})
     }
 
     playerUpdate(payload){this.setState({player: payload})}
@@ -88,6 +81,13 @@ class Producer extends Component {
     }
 
     componentDidMount() {
+        const io = require('socket.io-client')  
+        socket = io() 
+        socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
+        socket.on("playerDisplay", (payload) => {this.playerUpdate(payload)})
+        socket.on("visitors", (payload) => {this.visitorsUpdate(payload)})
+        socket.on("oscarNom", (payload) => {this.nomUpdate(payload)})
+        socket.on(time, (payload) => {this.startCheck(payload)})
         this.getUsers(); 
         socket.emit('startCheck', time) // socket.io to check if started
     }

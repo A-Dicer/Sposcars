@@ -3,9 +3,7 @@ import "./LeaderboardPage.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAstronaut, faArrowUp, faArrowDown, faUsers } from '@fortawesome/free-solid-svg-icons';
 
-
-const io = require('socket.io-client')  
-const socket = io() 
+let io; let socket;
 const time = toString(new Date())
 
 class LeaderboardPage extends Component {
@@ -16,8 +14,6 @@ class LeaderboardPage extends Component {
       opacity: 0
      
     }
-    socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
-    socket.on(time, (payload) => {this.startCheck(payload)})
 }
 
 updateLeaderboardFromSockets(payload) {
@@ -33,7 +29,13 @@ startCheck(payload) {
   }
 }
 
-componentDidMount() {socket.emit('startCheck', time)} // socket.io to check if started
+componentDidMount() {
+  io = require('socket.io-client')  
+  socket = io() 
+  socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
+  socket.on(time, (payload) => {this.startCheck(payload)})
+  socket.emit('startCheck', time)
+} // socket.io to check if started
 componentWillUnmount() {socket.emit('disconnect')}
 // -------------------------------------------- suffix ------------------------------------------------------
   suffix = (i) => {

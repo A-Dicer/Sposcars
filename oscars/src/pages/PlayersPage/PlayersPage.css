@@ -6,6 +6,7 @@
     border-radius: 2vw;
     box-shadow: 0.2vw 0.2vw 0.8vw #000;
     overflow: hidden;
+    transition: ease-in-out opacity 1s;
 }
 
 #Player > .col-6 > .card-body > img { 

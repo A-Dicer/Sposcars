@@ -75,11 +75,11 @@ timeConvert = (time) =>{
 // ----------------------------------------- Frontend Code -------------------------------------------------
   render() {
     return (
-      <div style={{"opacity": this.state.opacity, 'padding': '1vw'}}>
+      <div style={{'padding': '1vw'}}>
         {this.state.user
           ?
           <div className="container-fluid">   
-            <div className="row justify-content-center" id="Player">
+            <div className="row justify-content-center" id="Player" style={{"opacity": this.state.opacity}}>
               <div className="col-6">
                 <div className="card-body text-center">  
                   <img src={this.state.user.img} alt="User Img" />

@@ -26,7 +26,8 @@
 #Player > .col-6 > .card-body > div > h6 > .fa-arrow-down {color: rgb(215, 113, 113); position: relative; top: -1px}
 
 #Player > .col-6 > .card-body > h4 { font-size: 4vw; padding-top: 1vw}
-#Player > .col-6 > .card-body > h4 > svg { font-size: 3vw!important; color: #84c1da; position: relative; top: -3px}
+#Player > .col-6 > .card-body > h4 > svg { font-size: 3vw!important; color: #7a6105; position: relative; top: -.4vw}
+#Player > .col-6 > .card-body > a > svg {color: #84c1da!important}
 #Player > .col-6 > .card-body > a { position: relative; top: -13px; font-size: 3vw; color: #a3a19a }
 #Player > .col-6 > .card-body > a:hover > svg {color: #84c1da}
 #Player > .col-6:nth-of-type(2) {

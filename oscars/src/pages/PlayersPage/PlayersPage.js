@@ -18,38 +18,24 @@ class PlayersPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: [],
-      noms: noms 
+      user: {oscar:[]},
+      noms: noms,
+      opacity: 0 
     }
-    // socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
   }
-
-// updateLeaderboardFromSockets(payload) {
-  
-//   let finalInfo =  payload.leaderboard.filter((user)=> user.username !== "SiftPop")
-  
-//   this.setState({
-//     players: finalInfo, 
-//     livePicks: payload.picks
-//   })
-// }
 
   componentDidMount() {
     const io = require('socket.io-client')  
     socket = io() 
     socket.on('playerDisplay', (payload) => {this.updatePlayer(payload)})
     socket.emit('startCheck', time) // socket.io to check if started
-    // //check for back button 
-    // performance.navigation.type === 2
-    //  ? window.location.reload(true) //reload page
-    //  : this.getPicks(this.this.state.match.params.id) //get user picks
   }
 
   componentWillUnmount() {socket.emit('disconnect')}
 
   updatePlayer(payload) {
-    this.setState({user: payload.player, opacity: payload.opacity})
-    console.log(payload)
+    this.setState({opacity: 0})
+    setTimeout(()=>{this.setState({user: payload.player, opacity: payload.opacity})},1100)
   }
 
 // -------------------------------------------- suffix ------------------------------------------------------

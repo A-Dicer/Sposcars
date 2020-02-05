@@ -73,8 +73,8 @@ const direction =(data)=>{
 
 exports = module.exports = function(io) {  
   io.on('connection', (socket) => {  // Set socket.io listeners ------------------------
-    io.sockets.emit('visitors', io.engine.clientsCount-4)
-    socket.on('disconnect', function(){io.sockets.emit('visitors', io.engine.clientsCount-4)})
+    io.sockets.emit('visitors', io.engine.clientsCount)
+    socket.on('disconnect', function(){io.sockets.emit('visitors', io.engine.clientsCount)})
 
 //------------------------------------ playerInfo -------------------------------------- 
     socket.on('playerInfo', function(data){

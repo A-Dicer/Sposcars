@@ -27,14 +27,16 @@ startCheck(payload) {
   }
 }
 
-componentDidMount() {
-  io = require('socket.io-client')  
-  socket = io() 
-  socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
-  socket.on(time, (payload) => {this.startCheck(payload)})
-  socket.emit('startCheck', time)
-} // socket.io to check if started
-componentWillUnmount() {socket.emit('disconnect')}
+// ----------------------------------------- mount/unmount --------------------------------------------------
+  componentDidMount() {
+    io = require('socket.io-client')  
+    socket = io() 
+    socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
+    socket.on(time, (payload) => {this.startCheck(payload)})
+    socket.emit('startCheck', time)
+  } 
+  componentWillUnmount() {socket.emit('disconnect')}
+
 // -------------------------------------------- suffix ------------------------------------------------------
   suffix = (i) => {
     let j = i % 10, k = i % 100;
@@ -60,15 +62,15 @@ componentWillUnmount() {socket.emit('disconnect')}
             </thead>
             <tbody>
               { this.state.players.length 
-                  ? this.state.players.map((user, i)=>
-                      <tr key={`user${i}`} >
-                        {(i > 0 && user.place === this.state.players[i-1].place) || user.place === 0 ? <th scope="row text-right" style={{'border': 'none'}}></th> : <th scope="row text-right">{this.suffix(user.place)}:</th>}
-                        <td className="text-truncate"> {user.guru ?<FontAwesomeIcon icon={faUserAstronaut} /> :null} {user.username} </td>
-                        <td>{user.points}pts</td>
-                        <td>{user.direction ? <FontAwesomeIcon icon={user.direction === 'down' ? faArrowDown : faArrowUp} />: null }</td>      
-                      </tr>
-                  )
-                  :null
+                ? this.state.players.map((user, i)=>
+                    <tr key={`user${i}`} >
+                      {(i > 0 && user.place === this.state.players[i-1].place) || user.place === 0 ? <th scope="row text-right" style={{'border': 'none'}}></th> : <th scope="row text-right">{this.suffix(user.place)}:</th>}
+                      <td className="text-truncate"> {user.guru ?<FontAwesomeIcon icon={faUserAstronaut} /> :null} {user.username} </td>
+                      <td>{user.points}pts</td>
+                      <td>{user.direction ? <FontAwesomeIcon icon={user.direction === 'down' ? faArrowDown : faArrowUp} />: null }</td>      
+                    </tr>
+                )
+                :null
               }
             </tbody>
           </table>

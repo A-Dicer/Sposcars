@@ -7,7 +7,7 @@
     border: none; 
     background: url("../../assets/imgs/background1.png");
 }
-.profile > .col-12 > .card-body {margin-top: -55px; transition: ease-in-out opacity 1s}
+.profile > .col-12 > .card-body {margin-top: -55px; transition: ease-in-out opacity 1s; border-bottom: 1px solid #dee2e6!important}
 .profile > .col-12 > .card-body > img { 
     border-radius: 100%; 
     width: 80px; 
@@ -18,32 +18,30 @@
     box-shadow: 1px 1px 4px #000;
 }
 .profile > .col-12 > .card-body > hr {margin-top: 0px}
+.profile > .col-12 > .card-body > h4 {font-size: 20px}
+.profile > .col-12 > .card-body > h4 > svg {font-size: 16px; color: #a3a19a; position: relative; top: -1px}
+.profile > .col-12 > .card-body > a {position: relative; top: -13px; font-size: 13px; color: #a3a19a}
+.profile > .col-12 > .card-body > a:hover > svg {color: #84c1da}
+.profile > .col-12 > .card-body > div {margin-bottom: -5px; font-size: 14px}
 .profile > .col-12 > .card-body > div > h6 {margin-bottom: px}
 .profile > .col-12 > .card-body > div > h6 > svg {color: #136686; font-size: 18px;}
 .profile > .col-12 > .card-body > div > h6 > .fa-arrow-up {color: rgb(155, 184, 141); font-size: 15px; position: relative; top: -1px}
 .profile > .col-12 > .card-body > div > h6 > .fa-arrow-down {color: rgb(215, 113, 113); font-size: 15px; position: relative; top: -1px}
-.profile > .col-12 > .card-body > div {margin-bottom: -5px; font-size: 14px}
-
-.profile > .col-12 > .card-body {border-bottom: 1px solid #dee2e6!important}
-.profile > .col-12 > .card-body > h4 { font-size: 20px}
-.profile > .col-12 > .card-body > h4 > svg { font-size: 16px; color: #a3a19a; position: relative; top: -1px}
-.profile > .col-12 > .card-body > a { position: relative; top: -13px; font-size: 13px; color: #a3a19a }
-.profile > .col-12 > .card-body > a:hover > svg {color: #84c1da}
-.fa-chevron-down, .fa-chevron-up{color: #a3a19a; position: relative; top: 2px; cursor: pointer;}
-.fa-chevron-down:hover, .fa-chevron-up:hover {color: #d784da}
 .profile > .col-12 > .card-body > div > .fa-check-circle {color: rgb(93, 135, 72); position: relative; top: 0}
 .profile > .col-12 > .card-body > div > .fa-clipboard-list {position: relative; top: -1px}
+
+.fa-chevron-down, .fa-chevron-up{color: #a3a19a; position: relative; top: 2px; cursor: pointer}
+.fa-chevron-down:hover, .fa-chevron-up:hover {color: #d784da}
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
 .picksSpo {margin: 0; padding: 0; transition: ease-in-out height 1s; overflow: auto; background: #fff }
 .picksSpo > .col-12 > .category { margin: 0 auto; padding: 2px }
-.picksSpo > .col-12 > .category > div {padding: 0}
 .picksSpo > .col-12 > .category > .card-text {font-size: 12px;}
-.picksSpo > .col-12 > .category > div > { font-size: 12px; padding: 0px; margin: 0px; color: #353431 }
+.picksSpo > .col-12 > .category > div > {font-size: 12px; padding: 0; margin: 0; color: #353431}
 .picksSpo > .col-12 > .category > div  > svg { font-size: 12px; position: relative; right: 3px; top: -3px}
-.picksSpo > .col-12 > .category > div  > .fa-circle { color: #dfd9c9}
-.picksSpo > .col-12 > .category > div  > .fa-check-circle { color: rgb(155, 184, 141)}
-.picksSpo > .col-12 > .category > div  > .fa-times-circle { color: rgb(215, 113, 113)}
-.picksSpo > .col-12 > .category > div > div { font-size: 12px; margin: 0; color: #a3a19a }
+.picksSpo > .col-12 > .category > div  > .fa-circle {color: #dfd9c9}
+.picksSpo > .col-12 > .category > div  > .fa-check-circle {color: rgb(155, 184, 141)}
+.picksSpo > .col-12 > .category > div  > .fa-times-circle {color: rgb(215, 113, 113)}
+.picksSpo > .col-12 > .category > div > div {font-size: 12px; margin: 0; color: #a3a19a}
 

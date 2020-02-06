@@ -2,18 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Navbar from "../../components/Navbar";
 import Profile from "../../components/ProfileSpo";
-// import noms from "../../assets/js/noms.js";
 import {Leaderboard, Category} from "../../components/Leaderboard/";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faUserAstronaut, faUser, faUsers, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-
-
-//remove siftPop from the list. √
-//check game state when arriving... √
-//mobile fixes. 
-//save siftPops data
-//selections always visable.. although it is nice to have it hidden for mobile.
-//min height for entire thing
 
 let socket 
 let time = toString(new Date())
@@ -37,22 +26,22 @@ class Sposcars extends Component {
   }
     
 }
+
+// ----------------------------------------- mount/unmount --------------------------------------------------
   componentDidMount() { 
     const io = require('socket.io-client')  
     socket = io()
-    socket.on("oscarNom", (payload) => {this.updateNomsFromSockets(payload)})
-    socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
+    socket.on("oscarNom", (payload) => {this.updateNoms(payload)})
+    socket.on("leaderboardInfo", (payload) => {this.updateLeaderboard(payload)})
     socket.on(time, (payload) => {this.startCheck(payload)})
-     
     this.loadUsers(); // load users
     this.setState({ width: window.innerWidth, height: window.innerHeight }); //set width and height
     socket.emit('startCheck', time) // socket.io to check if started
     window.addEventListener('resize', this.updateDimensions);  //add listener
   }
-
   componentWillUnmount() {window.removeEventListener('resize', this.updateDimensions); socket.emit('disconnect')}
 
-// ------------------------------------------- socketIO ------------------------------------------------------
+// ------------------------------------------ startCheck -----------------------------------------------------
   startCheck(payload) {
     if(payload.users.length){
       this.setState({players: payload.users, livePicks: payload.picks })
@@ -60,7 +49,8 @@ class Sposcars extends Component {
     }
   }
 
-  updateNomsFromSockets(payload) {
+// ------------------------------------------ updateNoms -----------------------------------------------------
+  updateNoms(payload) {
     if(payload.info){
       let tempInfo = JSON.parse(JSON.stringify(payload.info));
 
@@ -83,12 +73,13 @@ class Sposcars extends Component {
     }
     
   }
-  updateLeaderboardFromSockets(payload) {
+
+// --------------------------------------- updateLeaderboard -------------------------------------------------
+  updateLeaderboard(payload) {
     let newUserInfo = payload.leaderboard.filter((user)=> user._id === this.state.user._id)
     let finalInfo =  payload.leaderboard.filter((user)=> user.username !== "SiftPop")
     
     this.userData(newUserInfo[0])
-    
     this.setState({
       players: finalInfo, 
       livePicks: payload.picks
@@ -101,7 +92,7 @@ class Sposcars extends Component {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
 
-// ------------------------------------------- userData ------------------------------------------------------
+// ------------------------------------------ userData -------------------------------------------------------
   userData = (user) => {
     if(user.twitterId){
       API.getTwitter(user.twitterId)
@@ -169,11 +160,11 @@ class Sposcars extends Component {
     let height;
     if(thing && this.state.picksHeight === 0) ;
     else if(thing){
-      height = this.state.height - (offsetHeight - offsetHeight2) - 50
+      height = this.state.height - (offsetHeight - offsetHeight2)
       this.setState({picksHeight: height})
     } 
     else {
-      this.state.picksHeight === 0 ? height = this.state.height - offsetHeight -50 : height = 0
+      this.state.picksHeight === 0 ? height = this.state.height - offsetHeight : height = 0
       this.setState({picksHeight: height})
     }
   }
@@ -183,12 +174,12 @@ class Sposcars extends Component {
   render() {
     return (
       <div className="container-fluid" style={{"opacity": this.state.opacity}}>
-        <Navbar info={this.state.user} />
+        {/* <Navbar info={this.state.user} /> */}
         <div className="row">
           
           <div className={`col-md-8 left ${this.state.width < 768 ? ' order-2' : null}` }>
             <div className="row leaderboard">
-              <div className="col-12" style={this.state.width > 768 ?{'height': this.state.height-50} :{'height': '400px'}}>
+              <div className="col-12" style={this.state.width > 768 ?{'height': this.state.height} :{'height': '400px'}}>
                 <Leaderboard 
                   guru={this.state.guru} 
                   data={this.state.players} 

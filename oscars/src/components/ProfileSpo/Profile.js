@@ -25,66 +25,58 @@ const suffix = (i) => {
 
 const Profile = props => 
     <div className="row profile" >
-            <div className="col-12">
-                <div className="text-center card-header">                    
-                </div>
-                
-                <div className="card-body text-center" style={{'opacity': props.opacity}}>
-                    <img src={props.user.img} alt="User Img" /> 
-                    <h4 className="card-title">  
-                        { props.user.guru ? <FontAwesomeIcon icon={faUserAstronaut} />  : null } {props.user.username}
-                    </h4>
+        <div className="col-12">
+            <div className="text-center card-header">                    
+            </div>            
+            <div className="card-body text-center" style={{'opacity': props.opacity}}>
+                <img src={props.user.img} alt="User Img" /> 
+                <h4 className="card-title">  
+                    { props.user.guru ? <FontAwesomeIcon icon={faUserAstronaut} />  : null } {props.user.username}
+                </h4>
 
-                    { props.user.twitterId ? 
-                        <a href={`https://twitter.com/${props.user.screenName.replace('@', '')}`} target='new'> 
-                            <FontAwesomeIcon icon={faTwitter} /> { props.user.screenName}
-                        </a>
-                    : null
-                    }
+                { props.user.twitterId 
+                ? <a href={`https://twitter.com/${props.user.screenName.replace('@', '')}`} target='new'> 
+                    <FontAwesomeIcon icon={faTwitter} /> { props.user.screenName}
+                  </a>
+                : null
+                }
 
-                    <hr />
-                    
-                    <div className="col-12"> 
-                        <h6> 
-                            <FontAwesomeIcon icon={faAward} /> {props.user.place !== 0 ? suffix(props.user.place) : null} Place {props.user.direction ? <FontAwesomeIcon icon={props.user.direction === 'down' ? faArrowDown : faArrowUp} />: null }
-                        </h6>
-                        {}
-                        {props.user.points}pts | <FontAwesomeIcon icon={faCheckCircle} /> {
-                            isNaN(Math.round((props.picks.filter((pick, i)=> pick===props.livePicks[i] && pick).length/props.livePicks.filter((pick)=> pick).length)*100))
-                            ? 0 : Math.round((props.picks.filter((pick, i)=> pick===props.livePicks[i] && pick).length/props.livePicks.filter((pick)=> pick).length)*100)
+                <hr />     
+                <div className="col-12"> 
+                    <h6> 
+                        <FontAwesomeIcon icon={faAward} /> {props.user.place !== 0 ? suffix(props.user.place) : null} Place {props.user.direction ? <FontAwesomeIcon icon={props.user.direction === 'down' ? faArrowDown : faArrowUp} />: null }
+                    </h6>
+                    {props.user.points}pts | <FontAwesomeIcon icon={faCheckCircle} /> {
+                        isNaN(Math.round((props.picks.filter((pick, i)=> pick===props.livePicks[i] && pick).length/props.livePicks.filter((pick)=> pick).length)*100))
+                        ? 0 : Math.round((props.picks.filter((pick, i)=> pick===props.livePicks[i] && pick).length/props.livePicks.filter((pick)=> pick).length)*100)
                         }% | <FontAwesomeIcon icon={faListUl} /> Selections  <FontAwesomeIcon icon={props.picksHeight === 0 ? faChevronUp : faChevronDown} onClick={function(){props.picksBtn(0)}} />
-                    </div>
-                </div>
-
-                <div className="row picksSpo" id="picksSpo" style={{'height': props.picksHeight}}>
-                    <div className="col-12">
-                    
-                        { 
-                            props.picks.map((pick, i) =>
-                                <div className="row category" key={`pick${i}`} style={i === 0 ?{'paddingTop':'10px'} : {'borderTop':'solid #dfd9c9 1px'}}>
-                                    <div className="">
-                                    { 
-                                        props.livePicks[i]  
-                                        ? props.livePicks[i] === pick 
-                                            ? <FontAwesomeIcon icon={faCheckCircle} /> 
-                                            : <FontAwesomeIcon icon={faTimesCircle} /> 
-                                        : <FontAwesomeIcon icon={faCircle} /> 
-                                    }
-                                    </div>
-                                    <div className="text-truncate"  > 
-                                        {noms[i].category}: 
-                                        <div className="text-truncate"> 
-                                            {i===24 ? timeConvert(pick) :pick} 
-                                        </div> 
-                                    </div>   
-                                </div>   
-                            )
-                        }
-                    </div>
-        
                 </div>
             </div>
 
+            <div className="row picksSpo" id="picksSpo" style={{'height': props.picksHeight}}>
+                <div className="col-12">
+                    { props.picks.map((pick, i) =>
+                        <div className="row category" key={`pick${i}`} style={i === 0 ?{'paddingTop':'10px'} : {'borderTop':'solid #dfd9c9 1px'}}>
+                            <div className="">
+                            { 
+                                props.livePicks[i]  
+                                ? props.livePicks[i] === pick 
+                                    ? <FontAwesomeIcon icon={faCheckCircle} /> 
+                                    : <FontAwesomeIcon icon={faTimesCircle} /> 
+                                : <FontAwesomeIcon icon={faCircle} /> 
+                            }
+                            </div>
+                            <div className="text-truncate"  > 
+                                {noms[i].category}: 
+                                <div className="text-truncate"> 
+                                    {i===24 ? timeConvert(pick) :pick} 
+                                </div> 
+                            </div>   
+                        </div>   
+                    )}
+                </div>
+            </div>
+        </div>
     </div>
 
 export default Profile;

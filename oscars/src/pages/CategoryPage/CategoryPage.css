@@ -9,19 +9,6 @@
     overflow: hidden;
     min-height: 36vw
 }
-
-/* 
-.categorySection { padding: 0 }
-.categorySection > .col-12 {
-    height: 50px; 
-    padding: 0; 
-    margin: 0;
-    border: none; 
-    background: url("../../assets/imgs/background1.png");
-} */
-
-
-/* #Category {padding-bottom: 5px; background: #fff; } */
 #Category > .screen {
     background: #fff; 
     z-index: 3; 
@@ -33,13 +20,8 @@
     transition: ease-in-out opacity 1s;
     background: url("../../assets/imgs/background2.jpg")
 }
-
-#Category > .screen > h5 {
-    background: url("../../assets/imgs/background1.png"); 
-    height: 100%;
-}
+#Category > .screen > h5 {background: url("../../assets/imgs/background1.png"); height: 100%}
 #Category > .screen >  img {width: 100%; position: relative;}
-
 #Category > .card-header {
     height: 13vw;
     padding: 3vw 0;
@@ -49,11 +31,7 @@
 }
 #Category > .card-header > h5 {font-size: 5vw; color: rgb(95, 103, 128)}
 #Category > .card-header > h5 > img {height: 9vw; position: relative; top: -1vw}
-
-
 #Category > .col-12 > .row {margin: 1vw 0}
-/* #Category > .col-12 > .row > .text-truncate {padding-top: 1px} */
-
 #Category > .col-12 > .row > .percContainer {
     margin: .5vw 0;
     height: 6vw;
@@ -64,7 +42,6 @@
     padding: 0;
     box-shadow: .4vw .4vw .4vw #ccc;
 }
-
 #Category > .col-12 > .row > .percContainer > .percColor { 
     width: 0;
     position: absolute;
@@ -75,7 +52,6 @@
     transition: ease-in-out width 3s;
     z-index: 1;
 }
-
 #Category > .col-12 > .row > .percContainer  > p {
     position: relative;
     top: .5vw;

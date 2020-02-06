@@ -5,11 +5,5 @@
     background: #fff;
     transition: ease-in-out opacity 1s;
 }
-#leaderboardOverlay > table{
-    font-size: 2vw!important;
-    /* border: solid 1px #000!important; */
-}
-#leaderboardOverlay > table > thead > tr > th:nth-of-type(1){
-    /* width: 15vw;  */
-}
-#leaderboardOverlay > table > thead > tr > th > svg {font-size: inherit;}
+#leaderboardOverlay > table{font-size: 2vw!important}
+#leaderboardOverlay > table > thead > tr > th > svg {font-size: inherit}

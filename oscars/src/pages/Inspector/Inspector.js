@@ -16,9 +16,6 @@ class Inspector extends Component {
         }
     }
 
-updateCodeFromSockets(payload) {this.setState({users: payload})}
-
-    
 componentDidMount() {
     const io = require('socket.io-client')  
     socket = io() 
@@ -26,24 +23,23 @@ componentDidMount() {
     this.getUsers()
 }
 
+updateCodeFromSockets(payload) {this.setState({users: payload})}
+
 // ------------------------------------------- getUsers -----------------------------------------------------
 //Get the users 
 getUsers = () => {
-    
     API.getUsers()
         .then(res => {this.setState({users: res.data.results})}
     ).catch(err => console.log(err));
   };
     
 // ------------------------------------------- onClick ------------------------------------------------------
-// 
 onClick = (id, pos) => {
    console.log()
     console.log(id)
   };
     
 // ------------------------------------------ Frontend Code ------------------------------------------------
-
     render() {
         return (
             <div className="container-fluid">

@@ -1,34 +1,26 @@
-/* .container-fluid > .row, .spoNoms {border-bottom: 1px solid #dee2e6!important } */
 .container-fluid > .row > .left {border-right: 1px solid #dee2e6!important}
 .col-lg-6 {padding: 0; margin: 0}
-/* .right > .row {overflow: auto;} */
 .fa-arrow-up {color: rgb(155, 184, 141)}
 .fa-arrow-down{color:rgb(215, 113, 113)}
 /* Leaderboard ---------------------------- */
-.leaderboard > .col-12 { padding: 0; overflow: auto; transition: height ease-in-out 1s;}
+.leaderboard > .col-12 {padding: 0; overflow: auto; transition: height ease-in-out 1s}
 
-/* Row ----------------------------------- */
-.table { font-size: 15px }
-
+.table {font-size: 15px}
+.table > tbody > .selected {background-color:#f2e3bb56!important}
+.table > tbody > tr > th {padding-left: 15px}
 .table > thead > tr > th:nth-child(1) {padding-left: 15px}
-.table > thead > tr > th:nth-child(1) > svg {font-size: 12px; cursor: pointer;}
+.table > thead > tr > th:nth-child(1) > svg {font-size: 12px; cursor: pointer}
 .table > thead > tr > th:nth-child(1) > svg:hover {color: #c4b897}
-.selectedGuru {color: #84b2da}
-
 .table > tbody > tr > td > button {height: 10px}
-.table > tbody > .selected {background-color:#f2e3bb56!important }
-.table > tbody > tr > td > .fa-user-astronaut {color: #c4b897}
-/* .table > tbody > tr:nth-of-type(odd) {background-color: #fff} */
 .table > tbody > tr > td > button > svg {color: #000; position: relative; top: -12px}
 .table > tbody > tr > td > button:hover > svg {color: rgb(215, 113, 113)}
+.table > tbody > tr > td > .fa-user-astronaut {color: #c4b897}
 .btn:focus,.btn:active:focus,.btn.active:focus,
-.btn:focus, .btn:active:focus, .btn.active:focus{ outline:none; box-shadow:none }
+.btn:focus, .btn:active:focus, .btn.active:focus{outline:none; box-shadow:none}
+.selectedGuru {color: #84b2da}
 
-.table > tbody > tr > th {padding-left: 15px}
-/* tr {height: 0px; padding: 0} */
-/* .table td, .table th {padding: 0 15px} */
 /* Category ------------------------------- */
-.categorySection { padding: 0 }
+.categorySection {padding: 0}
 .categorySection > .col-12 {
     height: 50px; 
     padding: 0; 
@@ -36,7 +28,6 @@
     border: none; 
     background: url("../../assets/imgs/background1.png");
 }
-
 
 .spoNoms {padding-bottom: 5px; background: #fff; min-height: 200px}
 .spoNoms > .screen {
@@ -55,7 +46,7 @@
     height: 100%;
     font-size: 30px
 }
-.spoNoms > .screen > h5 > img {width: 100%; position: relative; top: 35px }
+.spoNoms > .screen > h5 > img {width: 100%; position: relative; top: 35px}
 .spoNoms > .card-header {
     height: 50px; 
     padding: 10px 0; 
@@ -65,7 +56,7 @@
 }
 .spoNoms > .card-header > h5 {font-size:18px; color: rgb(95, 103, 128)}
 .spoNoms > .card-header > h5 > img {height: 35px; position: relative; top: -2px}
-.spoNoms > .col-12 > .row { margin: 2px 0; font-size: 12px }
+.spoNoms > .col-12 > .row {margin: 2px 0; font-size: 12px}
 .spoNoms > .col-12 > .row > .text-truncate {padding-top: 1px}
 .spoNoms > .col-12 > .row > .percContainer {
     margin: 5px 0;
@@ -84,7 +75,6 @@
     border-radius: 10px; 
     font-size: 8px;
     transition: ease-in-out width 3s;
-
 }
 
 .spoNoms > .col-12 > .row > .percContainer > .percColor > p {
@@ -93,3 +83,13 @@
     right: 0 ;  
     padding-left: 10px 
 }
+
+.spoNoms > .row > h5 > .col-12  {margin: 32px auto 0; width: fit-content; padding: 0}
+.spoNoms > .row > h5 > .col-12 > ul { font-size: 18px; margin: 3px auto 0; margin-right: 10px}
+.spoNoms > .row > h5 > .col-12 > ul > li { margin: 8px 3px }
+.spoNoms > .row > h5 > .col-12 > ul > li > a { color: #6b6964; cursor: pointer }
+.spoNoms > .row > h5 > .col-12 > ul > li > a:hover { color: #d3c7a8 }
+.spoNoms > .row > h5 > .col-12 > ul > li > .twit:hover { color: #84c1da }
+.spoNoms > .row > h5 > .col-12 > ul > li > .face:hover { color: #62749b }
+.spoNoms > .row > h5 > .col-12 > ul > li > .tube:hover { color: #c57d7a }
+.spoNoms > .row > h5 > .col-12 > ul > li > .cloud:hover { color: #fac292 }

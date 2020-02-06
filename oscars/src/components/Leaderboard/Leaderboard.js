@@ -24,16 +24,16 @@ export const Leaderboard = props =>
     </thead>
     <tbody>
       { props.data.length 
-          ? props.data.map((user, i)=>
-              <tr key={`user${i}`} className={user.username === props.user.username ? 'selected' : null}>
-                {(i > 0 && user.place === props.data[i-1].place) || user.place === 0 ? <th scope="row text-right" style={{'border': 'none'}}></th> : <th scope="row text-right">{suffix(user.place)}:</th>}
-                <td className="text-truncate"> {user.guru ?<FontAwesomeIcon icon={faUserAstronaut} /> :null} {user.username} </td>
-                <td>{user.points}pts</td>
-                { props.widthCheck ? <td>{user.direction ? <FontAwesomeIcon icon={user.direction === 'down' ? faArrowDown : faArrowUp} />: null }</td> : null}
-                <td><button className="btn btn-sm" name={user.username} value={i} onClick={props.onClick}><FontAwesomeIcon icon={faUser} /></button></td>
-              </tr>
-          )
-          :null
+        ? props.data.map((user, i)=>
+          <tr key={`user${i}`} className={user.username === props.user.username ? 'selected' : null}>
+            {(i > 0 && user.place === props.data[i-1].place) || user.place === 0 ? <th scope="row text-right" style={{'border': 'none'}}></th> : <th scope="row text-right">{suffix(user.place)}:</th>}
+            <td className="text-truncate"> {user.guru ?<FontAwesomeIcon icon={faUserAstronaut} /> :null} {user.username} </td>
+            <td>{user.points}pts</td>
+            { props.widthCheck ? <td>{user.direction ? <FontAwesomeIcon icon={user.direction === 'down' ? faArrowDown : faArrowUp} />: null }</td> : null}
+            <td><button className="btn btn-sm" name={user.username} value={i} onClick={props.onClick}><FontAwesomeIcon icon={faUser} /></button></td>
+          </tr>
+        )
+        :null
       }
     </tbody>
   </table>;

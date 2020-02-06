@@ -35,9 +35,28 @@ class Producer extends Component {
         }
     }
 
+// ----------------------------------------- mount/unmount --------------------------------------------------
+    componentDidMount() {
+        const io = require('socket.io-client')  
+        socket = io() 
+        socket.on("leaderboardInfo", (payload) => {this.leaderboardUpdate(payload)})
+        socket.on("playerDisplay", (payload) => {this.playerUpdate(payload)})
+        socket.on("visitors", (payload) => {this.visitorsUpdate(payload)})
+        socket.on("oscarNom", (payload) => {this.nomUpdate(payload)})
+        socket.on(time, (payload) => {this.startCheck(payload)})
+        this.getUsers(); 
+        socket.emit('startCheck', time) // socket.io to check if started
+    }
+    componentWillUnmount() {socket.emit('disconnect')}
+
+// ----------------------------------------- playerUpdate ---------------------------------------------------
     playerUpdate(payload){this.setState({player: payload})}
+
+// ----------------------------------------- visitorUpdate --------------------------------------------------
     visitorsUpdate(payload){this.setState({visitors: payload})}
-    updateLeaderboardFromSockets(payload) {
+    
+// --------------------------------------- leaderboardUpdate ------------------------------------------------
+    leaderboardUpdate(payload) {
         let finalInfo =  payload.leaderboard.filter((user)=> user.username !== "SiftPop")
         
         const searchData = finalInfo.filter((player, i) => 
@@ -50,6 +69,7 @@ class Producer extends Component {
         })
       }
 
+// ------------------------------------------- nomUpdate ---------------------------------------------------- 
     nomUpdate(payload) {
         if(payload.info){
             let tempInfo = JSON.parse(JSON.stringify(payload.info));
@@ -73,6 +93,7 @@ class Producer extends Component {
         }
     }
 
+// ------------------------------------------ startCheck ----------------------------------------------------
     startCheck(payload) {
         if(payload.users.length){
           let data = payload.users.filter((user)=> user.username !== "SiftPop")
@@ -80,19 +101,6 @@ class Producer extends Component {
         }
     }
 
-    componentDidMount() {
-        const io = require('socket.io-client')  
-        socket = io() 
-        socket.on("leaderboardInfo", (payload) => {this.updateLeaderboardFromSockets(payload)})
-        socket.on("playerDisplay", (payload) => {this.playerUpdate(payload)})
-        socket.on("visitors", (payload) => {this.visitorsUpdate(payload)})
-        socket.on("oscarNom", (payload) => {this.nomUpdate(payload)})
-        socket.on(time, (payload) => {this.startCheck(payload)})
-        this.getUsers(); 
-        socket.emit('startCheck', time) // socket.io to check if started
-    }
-
-    componentWillUnmount() {socket.emit('disconnect')}
 // -------------------------------------------- suffix ------------------------------------------------------
     suffix = (i) => {
         let j = i % 10, k = i % 100;

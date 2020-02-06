@@ -1,7 +1,7 @@
 #Player {
     width: 96vw!important;
     height: 56vw!important;
-    background: url("../../assets/imgs/background1.png");
+    background: url("../../assets/imgs/background2.jpg");
     border: solid 1px #000;
     border-radius: 2vw;
     box-shadow: 0.2vw 0.2vw 0.8vw #000;
@@ -18,17 +18,18 @@
     box-shadow: 1px 1px 4px #000;
     z-index: 1;
 }
-
-#Player > .col-6 > .card-body > hr {margin: 1vw; font-size: 20vw; border: solid #000 .1vw}
+#Player > .col-6:nth-child(1) {padding: 0!important}
+#Player > .col-6 > .card-body {padding-right: 0; padding-left: 0}
+#Player > .col-6 > .card-body > hr {margin: 1vw; border: solid #000000 .1vw}
 #Player > .col-6 > .card-body > div > h6 {font-size: 3vw}
 #Player > .col-6 > .card-body > div > h6 > svg {color: #136686; }
 #Player > .col-6 > .card-body > div > h6 > .fa-arrow-up {color: rgb(155, 184, 141); position: relative; top: -1px}
 #Player > .col-6 > .card-body > div > h6 > .fa-arrow-down {color: rgb(215, 113, 113); position: relative; top: -1px}
 
-#Player > .col-6 > .card-body > h4 { font-size: 4vw; padding-top: 1vw}
+#Player > .col-6 > .card-body > h4 { font-size: 4vw; padding-top: 1vw; margin-bottom: 0;}
 #Player > .col-6 > .card-body > h4 > svg { font-size: 3vw!important; color: #7a6105; position: relative; top: -.4vw}
 #Player > .col-6 > .card-body > a > svg {color: #84c1da!important}
-#Player > .col-6 > .card-body > a { position: relative; top: -13px; font-size: 3vw; color: #a3a19a }
+#Player > .col-6 > .card-body > a {font-size: 3vw; color: #a3a19a}
 #Player > .col-6 > .card-body > a:hover > svg {color: #84c1da}
 #Player > .col-6:nth-of-type(2) {
     border-left: 1px solid #a3a19a;

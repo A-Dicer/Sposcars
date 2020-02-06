@@ -4,6 +4,8 @@ import Navbar from "../../components/Navbar";
 import Profile from "../../components/ProfileSpo";
 // import noms from "../../assets/js/noms.js";
 import {Leaderboard, Category} from "../../components/Leaderboard/";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faUserAstronaut, faUser, faUsers, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 
 //remove siftPop from the list. √

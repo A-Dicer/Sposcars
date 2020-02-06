@@ -16,7 +16,7 @@
 .selectedGuru {color: #84b2da}
 
 .table > tbody > tr > td > button {height: 10px}
-.table > tbody > .selected {background-color:#f2e3bb56 }
+.table > tbody > .selected {background-color:#f2e3bb56!important }
 .table > tbody > tr > td > .fa-user-astronaut {color: #c4b897}
 /* .table > tbody > tr:nth-of-type(odd) {background-color: #fff} */
 .table > tbody > tr > td > button > svg {color: #000; position: relative; top: -12px}
@@ -67,7 +67,7 @@
 .spoNoms > .card-header > h5 > img {height: 35px; position: relative; top: -2px}
 .spoNoms > .col-12 > .row { margin: 2px 0; font-size: 12px }
 .spoNoms > .col-12 > .row > .text-truncate {padding-top: 1px}
-.percContainer {
+.spoNoms > .col-12 > .row > .percContainer {
     margin: 5px 0;
     height: 10px;
     border-radius: 10px;
@@ -77,7 +77,7 @@
     padding: 0;
     box-shadow: 1px 1px 1px #ccc;
 }
-.percColor { 
+.spoNoms > .col-12 > .row > .percContainer > .percColor { 
     width: 0;
     height: 100%;
     background: linear-gradient(to right, rgb(138, 174, 128), rgb(160, 201, 147)); 
@@ -87,7 +87,7 @@
 
 }
 
-.percColor > p {
+.spoNoms > .col-12 > .row > .percContainer > .percColor > p {
     position: relative;
     top: -2px;
     right: 0 ;  

@@ -11,8 +11,7 @@ class LeaderboardPage extends Component {
     super(props);
     this.state = {
       players: [],
-      opacity: 0
-     
+      opacity: 0 
     }
 }
 
@@ -22,7 +21,6 @@ updateLeaderboardFromSockets(payload) {
 }
 
 startCheck(payload) {
-
   if(payload.users.length){
     let data = payload.users.filter((user)=> user.username !== "SiftPop")
     this.setState({players: data, opacity: 1})

@@ -67,7 +67,7 @@ timeConvert = (time) =>{
           <div className="container-fluid">   
             <div className="row justify-content-center" id="Player" style={{"opacity": this.state.opacity}}>
               <div className="col-6">
-                <div className="card-body text-center">  
+                <div className="card-body text-center text-truncate">  
                   <img src={this.state.user.img} alt="User Img" />
                   <h4 className="card-title">  
                       { this.state.user.guru ? <FontAwesomeIcon icon={faUserAstronaut} />  : null } {this.state.user.username}
